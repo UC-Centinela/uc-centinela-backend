@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  db-centinela:
+    container_name: db-centinela
+    image: postgres:13
+    volumes:
+      - pgdata_centinela:/var/lib/postgresql/data
+    env_file:
+      - ./env/db-centinela.env
+    ports:
+      - "5432:5432"
+    networks:
+      - centinela-network
+
+  api-centinela:
+    container_name: api-centinela
+    build:
+      context: ./api-centinela
+      dockerfile: docker/Dockerfile.dev
+    environment:
+      NODE_ENV: development
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./api-centinela:/usr/src/app
+      - /usr/src/app/node_modules
+    env_file:
+      - ./env/api-centinela.env
+    depends_on:
+      - db-centinela
+    networks:
+      - centinela-network
+
+networks:
+  centinela-network:
+
+volumes:
+  pgdata_centinela:
+
