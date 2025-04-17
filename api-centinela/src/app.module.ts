@@ -7,6 +7,7 @@ import * as dotenv from 'dotenv';
 // entities importation
 import { User } from './models/users/user.entity';
 import { UsersModule } from './models/users/users.module';
+import { AuthzModule } from './authz/authz.module';
 
 dotenv.config({
   path: process.env.NODE_ENV !== 'test' ? '.env' : '.env.test',
@@ -30,7 +31,8 @@ dotenv.config({
       synchronize: true,
       ssl: false,
     }),
-    UsersModule
+    UsersModule,
+    AuthzModule
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -15,13 +15,16 @@ import {
 import { UsersService } from './users.service';
 import { Serialize } from '../common/interceptors/serialize.interceptor';
 import { User } from './user.entity';
-import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
-
+import { ApiOperation, ApiParam, ApiResponse, ApiTags, ApiBearerAuth } from '@nestjs/swagger';
+import { UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 @ApiTags('users')
+@ApiBearerAuth('JWT-auth')
 @Controller('users')
 export class UsersController {
   constructor(private userService: UsersService) {}
   @Post()
+  @UseGuards(AuthGuard('jwt'))
   @ApiOperation({
     summary: 'Crear un usuario',
     description: 'Crea un usuario si los datos son válidos',
@@ -32,6 +35,7 @@ export class UsersController {
     return this.userService.createUser(createUserDto);
   }
   @Get()
+  @UseGuards(AuthGuard('jwt'))
   @ApiOperation({
     summary: 'Obtener todos los usuarios',
     description: 'Obtiene todos los usuarios',
@@ -50,6 +54,7 @@ export class UsersController {
 
 
   @Get('/:id')
+  @UseGuards(AuthGuard('jwt'))
   @ApiOperation({
     summary: 'Obtener usuario por id',
     description: 'Obtiene un usuario a partir de su id',
@@ -66,6 +71,7 @@ export class UsersController {
     return user;
   }
   @Patch('/:id')
+  @UseGuards(AuthGuard('jwt'))
   @ApiOperation({
     summary: 'Actualizar usuario por id',
     description:
@@ -77,7 +83,7 @@ export class UsersController {
     type: UserDto,
   })
   @ApiParam({ name: 'id', description: 'Id del usuario a actualizar' })
-  @Serialize(UserDto)
+  @Serialize(UserDto) 
   async updateUserById(
     @Param('id') id: string,
     @Body() body: UpdateUserDto,
@@ -85,6 +91,7 @@ export class UsersController {
     return this.userService.updateUser(id, body);
   }
   @Delete('/:id')
+  @UseGuards(AuthGuard('jwt'))
   @ApiOperation({
     summary: 'Eliminar usuario por id',
     description: 'Elimina un usuario a partir de su id',
