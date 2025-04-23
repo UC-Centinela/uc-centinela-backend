@@ -25,14 +25,12 @@ dotenv.config({
       username: process.env.DB_USER,
       password: process.env.DB_PASS,
       database: process.env.DB_NAME,
-      entities: [
-        User
-      ],
+      entities: [User],
       synchronize: true,
       ssl: false,
     }),
     UsersModule,
-    AuthzModule
+    AuthzModule,
   ],
   controllers: [AppController],
   providers: [AppService],

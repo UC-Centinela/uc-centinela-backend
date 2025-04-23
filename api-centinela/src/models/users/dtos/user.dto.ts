@@ -36,8 +36,7 @@ export class CreateUserDto {
   description: string;
 }
 
-export class UpdateUserDto extends PartialType(CreateUserDto) {
-}
+export class UpdateUserDto extends PartialType(CreateUserDto) {}
 
 export class UserDto {
   @Expose()

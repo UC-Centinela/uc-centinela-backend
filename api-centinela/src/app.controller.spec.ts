@@ -1,7 +1,7 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { Test } from '@nestjs/testing';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UnauthorizedException, ExecutionContext, INestApplication } from '@nestjs/common';
+import { UnauthorizedException, INestApplication } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import * as request from 'supertest';
 
@@ -34,14 +34,11 @@ describe('AppController', () => {
     });
 
     it('should return 401 Unauthorized when accessing without JWT token', () => {
-      return request(app.getHttpServer())
-        .get('/')
-        .expect(401)
-        .expect({
-          statusCode: 401,
-          message: 'Unauthorized access',
-          error: 'Unauthorized'
-        });
+      return request(app.getHttpServer()).get('/').expect(401).expect({
+        statusCode: 401,
+        message: 'Unauthorized access',
+        error: 'Unauthorized',
+      });
     });
   });
 });

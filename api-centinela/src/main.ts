@@ -25,9 +25,7 @@ async function bootstrap() {
   );
   const config = new DocumentBuilder()
     .setTitle('API Centinela')
-    .setDescription(
-      'API para el manejo de la información de Centinela',
-    )
+    .setDescription('API para el manejo de la información de Centinela')
     .setVersion('1.1')
     .addBearerAuth(
       {

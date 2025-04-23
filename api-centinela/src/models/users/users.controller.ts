@@ -7,15 +7,17 @@ import {
   Param,
   Patch,
 } from '@nestjs/common';
-import {
-  CreateUserDto,
-  UpdateUserDto,
-  UserDto,
-} from './dtos/user.dto';
+import { CreateUserDto, UpdateUserDto, UserDto } from './dtos/user.dto';
 import { UsersService } from './users.service';
 import { Serialize } from '../common/interceptors/serialize.interceptor';
 import { User } from './user.entity';
-import { ApiOperation, ApiParam, ApiResponse, ApiTags, ApiBearerAuth } from '@nestjs/swagger';
+import {
+  ApiOperation,
+  ApiParam,
+  ApiResponse,
+  ApiTags,
+  ApiBearerAuth,
+} from '@nestjs/swagger';
 import { UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 @ApiTags('users')
@@ -52,7 +54,6 @@ export class UsersController {
     return users;
   }
 
-
   @Get('/:id')
   @UseGuards(AuthGuard('jwt'))
   @ApiOperation({
@@ -83,7 +84,7 @@ export class UsersController {
     type: UserDto,
   })
   @ApiParam({ name: 'id', description: 'Id del usuario a actualizar' })
-  @Serialize(UserDto) 
+  @Serialize(UserDto)
   async updateUserById(
     @Param('id') id: string,
     @Body() body: UpdateUserDto,
@@ -102,6 +103,4 @@ export class UsersController {
   async deleteUserById(@Param('id') id: string): Promise<User> {
     return this.userService.removeUser(id);
   }
-
-
 }
