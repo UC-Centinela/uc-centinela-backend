@@ -1,0 +1,164 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  """user id"""
+  id: String!
+
+  """user first name"""
+  firstName: String!
+
+  """user last name"""
+  lastName: String!
+
+  """user email"""
+  email: String!
+
+  """user customer id"""
+  customerId: String!
+
+  """user role"""
+  role: String!
+
+  """user idp id"""
+  idpId: String!
+}
+
+type Customer {
+  """customer id"""
+  id: Int!
+
+  """customer name"""
+  name: String!
+
+  """customer industry"""
+  industry: String!
+
+  """customer email"""
+  email: String!
+
+  """customer created at"""
+  createdAt: DateTime!
+
+  """customer updated at"""
+  updatedAt: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Query {
+  """Provision service: get all users in the system"""
+  allUsers: [User!]!
+
+  """Provision service: get a user by email"""
+  getUserByEmail(email: String!): User!
+
+  """Provision service: get all users by customer id"""
+  findUsersByCustomerId(customerId: Float!): [User!]!
+
+  """Provision service: get all customers in database"""
+  allCustomers: [Customer!]!
+
+  """Provision service: get customer information by email"""
+  getCustomerByEmail(email: String!): Customer!
+}
+
+type Mutation {
+  """Provision service: create a new user, need to specify the customer id"""
+  createUser(input: CreateUserInput!): User!
+
+  """Provision service: update a user, need to specify the email"""
+  updateUser(updateUserInput: UpdateUserInput!): User!
+
+  """Provision service: remove a user by email"""
+  removeUserByEmail(email: String!): Boolean!
+
+  """Provision service: asign a role to a user"""
+  assignRole(role: Role!, userEmail: String!): User!
+
+  """
+  Provision service: create a new customer with default user Admin by email input
+  """
+  createCustomer(createCustomerInput: CreateCustomerInput!): Customer!
+
+  """Provision service: update customer information by id"""
+  updateCustomer(updateCustomerInput: UpdateCustomerInput!): Customer!
+
+  """
+  Provision service: remove customer by id, WARNING: this action will delete all data related, as Users and Devices
+  """
+  removeCustomer(id: Int!): Boolean!
+}
+
+input CreateUserInput {
+  """user id"""
+  id: String
+
+  """user first name"""
+  firstName: String!
+
+  """user last name"""
+  lastName: String!
+
+  """user email"""
+  email: String!
+
+  """user customer id"""
+  customerId: Float!
+
+  """user role"""
+  role: Role!
+}
+
+"""User role enum"""
+enum Role {
+  SUPERADMIN
+  ADMIN
+  OPERATOR
+  GUEST
+}
+
+input UpdateUserInput {
+  """user id"""
+  id: String
+
+  """user first name"""
+  firstName: String
+
+  """user last name"""
+  lastName: String
+  email: String!
+
+  """user customer id"""
+  customerId: Float
+
+  """user role"""
+  role: Role
+}
+
+input CreateCustomerInput {
+  """customer name"""
+  name: String!
+
+  """industry name"""
+  industry: String!
+
+  """user email"""
+  email: String!
+}
+
+input UpdateCustomerInput {
+  """customer name"""
+  name: String
+
+  """industry name"""
+  industry: String
+
+  """user email"""
+  email: String
+  id: Int!
+}

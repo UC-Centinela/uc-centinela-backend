@@ -1,34 +1,15 @@
-/env
-env/
+/dist
 
-**/dist
-**/node_modules
+node_modules
+.env
 
+package-lock.json
+.envrc
+credentials.json
+.fleet
+.vscode
 .DS_Store
-*.pem
 
-# Local .terraform directories
-**/.terraform/*
-
-# .tfstate files
-*.tfstate
-*.tfstate.*
-
-# Ignore CLI configuration files
-.terraformrc
-terraform.rc
-*.tfplan
-*.lock.hcl
-
-**/resource
-
-update-integrations.sh
-
-deploy.zip
-
-
-docker-compose.prod.for.testing.yml
-
-firebase-admin-sdk.json
-
-configure_cors_all_resources.sh
+/coverage
+.qodo
+/logs
