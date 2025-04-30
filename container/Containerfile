@@ -1,0 +1,17 @@
+FROM node:20-bullseye-slim as builder
+# RUN apk add make
+WORKDIR /app
+COPY . .
+RUN npm install
+RUN npm run build
+RUN npm run prisma:client
+RUN sed -i 's/src/dist/g' package.json
+
+FROM node:20-bullseye-slim
+WORKDIR /app
+COPY --from=builder /app/dist dist
+COPY --from=builder /app/node_modules node_modules
+COPY /prisma prisma
+COPY /container/entrypoint.sh /app/entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
+ENTRYPOINT ["./entrypoint.sh"]
