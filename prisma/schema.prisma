@@ -34,4 +34,31 @@ model User {
   lastLogin DateTime?
   customer Customer? @relation(fields: [customerId], references: [id], onDelete: Cascade)
   customerId Int?
+  createdTasks   Task[]   @relation("Creator")
+  revisedTasks   Task[]   @relation("Revisor")
+}
+
+model Task {
+  id                 Int      @id @default(autoincrement())
+  title              String
+  state              TaskState @default(PENDING)
+  instruction        String
+  comments           String?
+  videoUrl           String?
+  audioTranscription String?
+  assignationDate    DateTime?
+  requiredSendDate   DateTime?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  creator            User     @relation("Creator", fields: [creatorUserId], references: [id])
+  creatorUserId      Int
+  revisor            User?    @relation("Revisor", fields: [revisorUserId], references: [id])
+  revisorUserId      Int?
+}
+
+enum TaskState {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  REVIEWED
 }

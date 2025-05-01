@@ -22,7 +22,8 @@
       "@commons/*": ["commons/*"],
       "@customer/*": ["customer/*"],
       "@user/*": ["user/*"],
-      "@authz/*": ["authz/*"]
+      "@authz/*": ["authz/*"],
+      "@task/*": ["task/*"],      
     }
   },
   "include": ["src/**/*.ts"],
