@@ -54,6 +54,7 @@ model Task {
   creatorUserId      Int
   revisor            User?    @relation("Revisor", fields: [revisorUserId], references: [id])
   revisorUserId      Int?
+  criticActivities  CriticActivity[]
 }
 
 enum TaskState {
@@ -61,4 +62,13 @@ enum TaskState {
   IN_PROGRESS
   COMPLETED
   REVIEWED
+}
+
+model CriticActivity {
+  id      Int    @id @default(autoincrement())
+  title   String
+  task    Task   @relation(fields: [taskId], references: [id])
+  taskId  Int
+
+  @@map("critic_activities")
 }

@@ -23,7 +23,8 @@
       "@customer/*": ["customer/*"],
       "@user/*": ["user/*"],
       "@authz/*": ["authz/*"],
-      "@task/*": ["task/*"],      
+      "@task/*": ["task/*"],
+      "@critic-activity/*": ["critic-activity/*"]      
     }
   },
   "include": ["src/**/*.ts"],
