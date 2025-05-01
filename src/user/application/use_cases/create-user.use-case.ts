@@ -14,37 +14,44 @@ export class CreateUserUseCase {
   }
 
   async execute (createUserDTO: CreateUserDTO): Promise<User> {
-
-    // Check if user already exists in database
     const user = await this.userRepository.findOne(createUserDTO.email)
+    
+    // Caso 1: Usuario ya existe con IDP (Auth0)
     if (user && user.idpId) {
-      this.logger.warn(`[execute] User already exists in database: ${JSON.stringify(user, null, 2)}`)
+      this.logger.warn(`[execute] User already exists in database: ${user.email}`)
       this.logger.warn(`[execute] User already exists in identity provider: ${user.idpId}`)
       return user
     }
 
+    // Caso 2: Usuario existe pero sin IDP
     if (user && !user.idpId) {
-      this.logger.warn(`[execute] User already exists in database: ${JSON.stringify(user, null, 2)}`)
-      this.logger.warn(`[execute] User does not have an identity provider id`)
+      this.logger.warn(`[execute] User exists in database but lacks idpId: ${user.email}`)
 
-      // Enrole user in identity provider
+      // Si estamos en modo local, no registramos en Auth0
+      if (process.env.NODE_ENV === 'local') {
+        return user
+      }
+
       const idpUser = await this.enroleUserInIdentityProvider(createUserDTO)
-      this.logger.debug(`[execute] User created in identity provider: ${JSON.stringify(idpUser, null, 2)}`)
-
-      // Update user in database
       const updatedUser = await this.userRepository.update(user.update({ idpId: idpUser.user_id, role: createUserDTO.role }))
       return updatedUser
     }
 
-    // Create user in identity provider
+    // Caso 3: Usuario nuevo
+    if (process.env.NODE_ENV === 'local') {
+      const newUser = User.create({
+        email: createUserDTO.email,
+        firstName: createUserDTO.firstName,
+        lastName: createUserDTO.lastName,
+        customerId: createUserDTO.customerId,
+        role: createUserDTO.role
+      })
+      return await this.userRepository.create(newUser)
+    }
+
+    // Producción: crear en identity provider y luego en base
     const idpUser = await this.enroleUserInIdentityProvider(createUserDTO)
-    this.logger.debug(`[execute] User created in identity provider: ${JSON.stringify(idpUser, null, 2)}`)
-
-    // Create user in database
-    const newUser = await this.createUserInDatabase(createUserDTO, idpUser.user_id)
-    this.logger.debug(`[execute] User created in database: ${JSON.stringify(newUser, null, 2)}`)    
-
-    return newUser
+    return await this.createUserInDatabase(createUserDTO, idpUser.user_id)
   }
 
   private async createUserInDatabase (createUserDTO: CreateUserDTO, idpId?: string): Promise<User> {
@@ -75,16 +82,14 @@ export class CreateUserUseCase {
   }
 
   private async enroleUserInIdentityProvider (createUserDTO: CreateUserDTO): Promise<IdpUserBody> {
-    // Create user in identity provider
     const idpUser = await this.createUserInIdentityProvider({
       email: createUserDTO.email,
-      name: createUserDTO.firstName + ' ' + createUserDTO.lastName,
+      name: `${createUserDTO.firstName} ${createUserDTO.lastName}`,
       given_name: createUserDTO.firstName,
       family_name: createUserDTO.lastName
     })
-    this.logger.debug(`[execute] User created in identity provider: ${JSON.stringify(idpUser, null, 2)}`)
-    this.logger.debug(`[execute] Role to assign: ${createUserDTO.role}`)
-    // Assign role to user in identity provider
+    this.logger.debug(`[enroleUserInIdentityProvider] Created: ${idpUser.user_id}`)
+
     await this.idpService.assignRole(idpUser.user_id, createUserDTO.role)
     return idpUser
   }

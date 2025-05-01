@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common'
 import { ICriticActivityStorageAdapter } from '@critic-activity/domain/interfaces/critic-activity.repository'
 import { CriticActivity } from '@critic-activity/domain/critic-activity'
 import { CriticActivityStorage } from '../prisma/critic-activity.storage'
-import { mapPrismaCriticActivityToDomain } from '../critic-activity.utils'
+import { mapPrismaCriticActivityToDomain } from './critic-activity.utils'
 
 @Injectable()
 export class CriticActivityStorageAdapter implements ICriticActivityStorageAdapter {

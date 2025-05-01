@@ -14,6 +14,8 @@ interface TaskProps {
   updatedAt?: Date;
 }
 
+import { registerEnumType } from '@nestjs/graphql'
+
 export enum TaskState {
   PENDING = 'PENDING',
   IN_PROGRESS = 'IN_PROGRESS',
@@ -54,3 +56,8 @@ export class Task {
     return new Task(props);
   }
 }
+
+registerEnumType(TaskState, {
+  name: 'TaskState',
+  description: 'Enum que representa los posibles estados de una tarea'
+})
