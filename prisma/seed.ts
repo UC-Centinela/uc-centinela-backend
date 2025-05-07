@@ -5,9 +5,9 @@ const prisma = new PrismaClient()
 async function main() {
   // Mock Users
   const users = [
-    { firstName: 'Alice', lastName: 'Smith', email: 'alice@example.com', role: 'ADMIN' },
-    { firstName: 'Bob', lastName: 'Johnson', email: 'bob@example.com', role: 'USER' },
-    { firstName: 'Charlie', lastName: 'Brown', email: 'charlie@example.com', role: 'REVISOR' },
+    { firstName: 'Alice', lastName: 'Smith', email: 'alice@example.com', role: 'ADMIN', rut: '12345678' },
+    { firstName: 'Bob', lastName: 'Johnson', email: 'bob@example.com', role: 'USER', rut: '12345678' },
+    { firstName: 'Charlie', lastName: 'Brown', email: 'charlie@example.com', role: 'REVISOR', rut: '12345678' },
   ]
 
   for (const user of users) {

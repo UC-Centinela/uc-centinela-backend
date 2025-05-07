@@ -23,6 +23,9 @@ type User {
 
   """user idp id"""
   idpId: String!
+
+  """user rut (Chilean ID)"""
+  rut: String
 }
 
 type Customer {
@@ -151,6 +154,9 @@ input CreateUserInput {
 
   """user role"""
   role: Role!
+
+  """user rut (Chilean ID)"""
+  rut: String
 }
 
 """User role enum"""
@@ -177,6 +183,9 @@ input UpdateUserInput {
 
   """user role"""
   role: Role
+
+  """user rut (Chilean ID)"""
+  rut: String
 }
 
 input CreateCustomerInput {

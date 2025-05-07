@@ -16,6 +16,7 @@ interface UserProps {
   email: string;
   customerId: number;
   lastLogin?: Date;
+  rut?: string;
 }
 
 export enum Role {
@@ -63,6 +64,10 @@ export class User {
 
   get lastLogin (): Date | undefined {
     return this.props.lastLogin
+  }
+
+  get rut (): string | undefined {
+    return this.props.rut
   }
 
   get role (): Role {
