@@ -22,7 +22,8 @@
     "commit": "git-cz",
     "prisma:client": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
-    "prisma:deploy": "prisma migrate deploy"
+    "prisma:deploy": "prisma migrate deploy",
+    "prisma:seed": "ts-node --transpile-only prisma/seed.ts"
   },
   "repository": {
     "type": "git",

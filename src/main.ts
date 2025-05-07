@@ -28,6 +28,11 @@ async function bootstrap () {
     app.useLogger(LoggerFactory(config))
   
     // CORS
+    // app.enableCors({
+    //   origin: 'http://localhost:3443',
+    //   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    //   credentials: true,
+    // })
     await app.register(fastifyCors as any, {
       origin: (origin, callback) => {
         const allowedOrigins = (process.env.HOSTNAME_FOR_FRONTEND || 'localhost:3000').split(',')
