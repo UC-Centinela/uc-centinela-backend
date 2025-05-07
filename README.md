@@ -75,6 +75,8 @@ DATABASE_URL="postgresql://{user_name}:{password}@localhost:5432/{db_name}?schem
 - `npm run prisma:migrate`: For development
 - `npm run prisma:deploy`: For production
 
+4. Run seeds:
+- `npm run prisma:seed`: 
 ### Environment Configuration
 
 The application supports different environments through NODE_ENV:
