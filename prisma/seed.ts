@@ -3,11 +3,23 @@ import { PrismaClient, TaskState } from '@prisma/client'
 const prisma = new PrismaClient()
 
 async function main() {
+
+  // Mock Customers
+  const customers = [
+    { name: 'Centinela', industry: 'Mineria', email: 'centinela@example.com' },
+  ]
+
+  for (const customer of customers) {
+    await prisma.customer.create({
+      data: customer,
+    })
+  }
+
   // Mock Users
   const users = [
-    { firstName: 'Alice', lastName: 'Smith', email: 'alice@example.com', role: 'ADMIN' },
-    { firstName: 'Bob', lastName: 'Johnson', email: 'bob@example.com', role: 'USER' },
-    { firstName: 'Charlie', lastName: 'Brown', email: 'charlie@example.com', role: 'REVISOR' },
+    { firstName: 'Alice', lastName: 'Smith', email: 'alice@example.com', role: 'ADMIN', rut: '12345678', customerId: 1 },
+    { firstName: 'Bob', lastName: 'Johnson', email: 'bob@example.com', role: 'USER', rut: '12345678', customerId: 1 },
+    { firstName: 'Charlie', lastName: 'Brown', email: 'charlie@example.com', role: 'REVISOR', rut: '12345678', customerId: 1 },
   ]
 
   for (const user of users) {
