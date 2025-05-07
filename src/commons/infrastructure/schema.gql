@@ -50,6 +50,34 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type Task {
+  id: Int!
+  title: String!
+  instruction: String!
+  comments: String
+  state: TaskState!
+  videoUrl: String
+  audioTranscription: String
+  assignationDate: DateTime
+  requiredSendDate: DateTime
+  creatorUserId: Int!
+  revisorUserId: Int
+}
+
+"""Enum que representa los posibles estados de una tarea"""
+enum TaskState {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  REVIEWED
+}
+
+type CriticActivity {
+  id: Int!
+  title: String!
+  taskId: Int!
+}
+
 type Query {
   """Provision service: get all users in the system"""
   allUsers: [User!]!
@@ -65,6 +93,11 @@ type Query {
 
   """Provision service: get customer information by email"""
   getCustomerByEmail(email: String!): Customer!
+  findAllTasks: [Task!]!
+  findTask(id: Int!): Task!
+  findAllCriticActivities: [CriticActivity!]!
+  findCriticActivity(id: Float!): CriticActivity!
+  findAllCriticActivitiesByTask(taskId: Float!): [CriticActivity!]!
 }
 
 type Mutation {
@@ -92,6 +125,12 @@ type Mutation {
   Provision service: remove customer by id, WARNING: this action will delete all data related, as Users and Devices
   """
   removeCustomer(id: Int!): Boolean!
+  createTask(input: CreateTaskInput!): Task!
+  updateTask(input: UpdateTaskInput!): Task!
+  deleteTask(id: Int!): Boolean!
+  createCriticActivity(input: CreateCriticActivityInput!): CriticActivity!
+  updateCriticActivity(input: UpdateCriticActivityInput!): CriticActivity!
+  deleteCriticActivity(id: Float!): Boolean!
 }
 
 input CreateUserInput {
@@ -160,5 +199,43 @@ input UpdateCustomerInput {
 
   """user email"""
   email: String
+  id: Int!
+}
+
+input CreateTaskInput {
+  title: String!
+  instruction: String!
+  state: TaskState!
+  comments: String
+  videoUrl: String
+  audioTranscription: String
+  assignationDate: DateTime
+  requiredSendDate: DateTime
+  creatorUserId: Float!
+  revisorUserId: Float
+}
+
+input UpdateTaskInput {
+  title: String
+  instruction: String
+  state: TaskState
+  comments: String
+  videoUrl: String
+  audioTranscription: String
+  assignationDate: DateTime
+  requiredSendDate: DateTime
+  creatorUserId: Float
+  revisorUserId: Float
+  id: Float!
+}
+
+input CreateCriticActivityInput {
+  title: String!
+  taskId: Int!
+}
+
+input UpdateCriticActivityInput {
+  title: String
+  taskId: Int
   id: Int!
 }

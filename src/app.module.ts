@@ -17,6 +17,9 @@ import { config } from '@commons/infrastructure/config'
 import { PerrmissionsGuard } from 'authz/permissions.guard'
 import { RolesGuard } from 'authz/roles.guard'
 import { CustomerAccessGuard } from 'authz/customer-access.guard'
+import { TaskModule } from '@task/infrastructure/task.module'
+import { CriticActivity } from '@critic-activity/domain/critic-activity'
+import { CriticActivityModule } from '@critic-activity/infrastructure/critic-activity.module'
 
 // Control the guard access depending on the environment
 const authGuard = {
@@ -57,7 +60,9 @@ if (config.nodeEnv !== 'local') {
     }), //Define donde se guarda el schema
     UserModule,
     CustomerModule,
-    AuthzModule
+    AuthzModule,
+    TaskModule,
+    CriticActivityModule
   ],
   controllers: [],
   providers: [...providerConfig],
