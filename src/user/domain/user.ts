@@ -23,7 +23,9 @@ export enum Role {
   SUPERADMIN = 'roleSuperAdmin',
   ADMIN = 'roleAdmin',
   OPERATOR = 'roleOperator',
-  GUEST = 'roleGuest'
+  GUEST = 'roleGuest',
+  REVISOR = 'roleRevisor',
+  USER = 'roleUser',
 }
 
 export class User {

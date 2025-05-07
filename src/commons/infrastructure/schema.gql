@@ -165,6 +165,8 @@ enum Role {
   ADMIN
   OPERATOR
   GUEST
+  REVISOR
+  USER
 }
 
 input UpdateUserInput {
