@@ -37,4 +37,10 @@ export class CriticActivityStorageAdapter implements ICriticActivityStorageAdapt
     await this.storage.delete(id)
     return true
   }
+
+  async findAllByTaskId(taskId: number): Promise<CriticActivity[]> {
+    const result = await this.storage.findAllByTaskId(taskId)
+    return result.map(mapPrismaCriticActivityToDomain)
+  }
+  
 }

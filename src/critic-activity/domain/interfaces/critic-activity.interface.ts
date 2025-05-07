@@ -16,4 +16,5 @@ export interface ICriticActivityService {
   findOne(id: number): Promise<CriticActivity>;
   update(dto: UpdateCriticActivityDTO): Promise<CriticActivity>;
   delete(id: number): Promise<boolean>;
+  findAllByTaskId(taskId: number): Promise<CriticActivity[]>;
 }

@@ -97,6 +97,7 @@ type Query {
   findTask(id: Int!): Task!
   findAllCriticActivities: [CriticActivity!]!
   findCriticActivity(id: Float!): CriticActivity!
+  findAllCriticActivitiesByTask(taskId: Float!): [CriticActivity!]!
 }
 
 type Mutation {

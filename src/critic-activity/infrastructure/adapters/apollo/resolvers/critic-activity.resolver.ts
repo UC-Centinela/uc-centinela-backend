@@ -39,4 +39,10 @@ export class CriticActivityResolver {
   delete(@Args('id') id: number) {
     return this.service.delete(id)
   }
+
+  @Query(() => [CriticActivity], { name: 'findAllCriticActivitiesByTask' })
+  findAllByTaskId(@Args('taskId') taskId: number) {
+    return this.service.findAllByTaskId(taskId)
+  }
+
 }

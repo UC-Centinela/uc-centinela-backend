@@ -6,4 +6,5 @@ export abstract class ICriticActivityStorageAdapter {
   abstract findOne(id: number): Promise<CriticActivity>;
   abstract update(activity: CriticActivity): Promise<CriticActivity>;
   abstract delete(id: number): Promise<boolean>;
+  abstract findAllByTaskId(taskId: number): Promise<CriticActivity[]>;
 }

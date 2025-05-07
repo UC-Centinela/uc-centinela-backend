@@ -6,6 +6,8 @@ import { UpdateCriticActivityUseCase } from './use_cases/update-critic-activity.
 import { FindAllCriticActivityUseCase } from './use_cases/find-all-critic-activity.use-case'
 import { FindOneCriticActivityUseCase } from './use_cases/find-one-critic-activity.use-case'
 import { DeleteCriticActivityUseCase } from './use_cases/delete-critic-activity.use-case'
+import { FindByTaskIdCriticActivityUseCase } from './use_cases/find-by-task-id-critic-activity.use-case'
+
 
 @Injectable()
 export class CriticActivityService implements ICriticActivityService {
@@ -14,7 +16,8 @@ export class CriticActivityService implements ICriticActivityService {
     private readonly updateUC: UpdateCriticActivityUseCase,
     private readonly findAllUC: FindAllCriticActivityUseCase,
     private readonly findOneUC: FindOneCriticActivityUseCase,
-    private readonly deleteUC: DeleteCriticActivityUseCase
+    private readonly deleteUC: DeleteCriticActivityUseCase,
+    private readonly findByTaskUC: FindByTaskIdCriticActivityUseCase
   ) {}
 
   create(dto: CreateCriticActivityDTO): Promise<CriticActivity> {
@@ -36,4 +39,9 @@ export class CriticActivityService implements ICriticActivityService {
   delete(id: number): Promise<boolean> {
     return this.deleteUC.execute(id)
   }
+
+  findAllByTaskId(taskId: number): Promise<CriticActivity[]> {
+    return this.findByTaskUC.execute(taskId)
+  }
+  
 }

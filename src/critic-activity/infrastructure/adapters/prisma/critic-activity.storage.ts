@@ -25,4 +25,11 @@ export class CriticActivityStorage {
   delete(id: number): Promise<CriticActivity> {
     return this.prisma.criticActivity.delete({ where: { id } })
   }
+
+  findAllByTaskId(taskId: number) {
+    return this.prisma.criticActivity.findMany({
+      where: { taskId },
+    })
+  }
+  
 }
