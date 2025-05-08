@@ -34,6 +34,11 @@ export class CreateUserInput {
   @IsNotEmpty()
   @Field(() => Role, { description: 'user role' })
   role: Role
+  
+  @IsOptional()
+  @IsString()
+  @Field(() => String, { nullable: true, description: 'user rut (Chilean ID)' })
+  rut?: string
 
   //ToDomain
   public toDomain (): User {
@@ -43,7 +48,8 @@ export class CreateUserInput {
       lastName: this.lastName,
       email: this.email,
       customerId: this.customerId,
-      role: this.role
+      role: this.role,
+      rut: this.rut
     })
   }
 }
