@@ -57,6 +57,7 @@ model CriticActivity {
   title  String
   taskId Int
   task   Task   @relation(fields: [taskId], references: [id], map: "critic_activities_taskId_fkey")
+  @@map("CriticActivity")
 }
 
 enum TaskState {

@@ -5,10 +5,11 @@ const prisma = new PrismaClient()
 async function main() {
   // Mock Users
   const users = [
-    { firstName: 'Alice', lastName: 'Smith', email: 'alice@example.com', role: 'ADMIN' },
-    { firstName: 'Bob', lastName: 'Johnson', email: 'bob@example.com', role: 'USER' },
-    { firstName: 'Charlie', lastName: 'Brown', email: 'charlie@example.com', role: 'REVISOR' },
-  ]
+    { firstName: 'Alice', lastName: 'Smith', email: 'alice@example.com', role: 'ADMIN', customerId: 1 },
+    { firstName: 'Bob', lastName: 'Johnson', email: 'bob@example.com', role: 'USER', customerId: 1 },
+    { firstName: 'Charlie', lastName: 'Brown', email: 'charlie@example.com', role: 'REVISOR', customerId: 1 },
+  ];
+  
 
   for (const user of users) {
     await prisma.user.create({
