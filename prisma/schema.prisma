@@ -39,8 +39,7 @@ model Task {
   state              TaskState        @default(PENDING)
   instruction        String
   comments           String?
-  videoUrl           String?
-  audioTranscription String?
+  changeHistory      String?
   assignationDate    DateTime?
   requiredSendDate   DateTime?
   createdAt          DateTime         @default(now())

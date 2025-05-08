@@ -4,14 +4,13 @@ interface TaskProps {
   instruction: string;
   comments?: string;
   state: TaskState;
-  videoUrl?: string;
-  audioTranscription?: string;
   assignationDate?: Date;
   requiredSendDate?: Date;
   creatorUserId: number;
   revisorUserId?: number;
   createdAt?: Date;
   updatedAt?: Date;
+  changeHistory?: string;
 }
 
 import { registerEnumType } from '@nestjs/graphql'
@@ -35,14 +34,13 @@ export class Task {
   get instruction() { return this.props.instruction; }
   get comments() { return this.props.comments; }
   get state() { return this.props.state; }
-  get videoUrl() { return this.props.videoUrl; }
-  get audioTranscription() { return this.props.audioTranscription; }
   get assignationDate() { return this.props.assignationDate; }
   get requiredSendDate() { return this.props.requiredSendDate; }
   get creatorUserId() { return this.props.creatorUserId; }
   get revisorUserId() { return this.props.revisorUserId; }
   get createdAt() { return this.props.createdAt; }
   get updatedAt() { return this.props.updatedAt; }
+  get changeHistory() { return this.props.changeHistory; }
 
   static create(props: Omit<TaskProps, 'id' | 'createdAt' | 'updatedAt'>): Task {
     return new Task({ ...props });

@@ -7,8 +7,7 @@ export class CreateTaskInput {
   @Field() instruction: string
   @Field(() => TaskState) state: TaskState
   @Field({ nullable: true }) comments?: string
-  @Field({ nullable: true }) videoUrl?: string
-  @Field({ nullable: true }) audioTranscription?: string
+  @Field({ nullable: true }) changeHistory?: string
   @Field({ nullable: true }) assignationDate?: Date
   @Field({ nullable: true }) requiredSendDate?: Date
   @Field() creatorUserId: number

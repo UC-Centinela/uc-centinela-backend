@@ -56,8 +56,7 @@ type Task {
   instruction: String!
   comments: String
   state: TaskState!
-  videoUrl: String
-  audioTranscription: String
+  changeHistory: String
   assignationDate: DateTime
   requiredSendDate: DateTime
   creatorUserId: Int!
@@ -207,8 +206,7 @@ input CreateTaskInput {
   instruction: String!
   state: TaskState!
   comments: String
-  videoUrl: String
-  audioTranscription: String
+  changeHistory: String
   assignationDate: DateTime
   requiredSendDate: DateTime
   creatorUserId: Float!
@@ -220,8 +218,7 @@ input UpdateTaskInput {
   instruction: String
   state: TaskState
   comments: String
-  videoUrl: String
-  audioTranscription: String
+  changeHistory: String
   assignationDate: DateTime
   requiredSendDate: DateTime
   creatorUserId: Float
