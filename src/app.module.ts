@@ -20,6 +20,7 @@ import { CustomerAccessGuard } from 'authz/customer-access.guard'
 import { TaskModule } from '@task/infrastructure/task.module'
 import { CriticActivityModule } from '@critic-activity/infrastructure/critic-activity.module'
 import { MultimediaModule } from '@multimedia/infrastructure/multimedia.module'
+import { ControlStrategyModule } from '@control-strategy/infrastructure/control-strategy.module'
 
 // Control the guard access depending on the environment
 const authGuard = {
@@ -63,7 +64,8 @@ if (config.nodeEnv !== 'local') {
     AuthzModule,
     TaskModule,
     CriticActivityModule,
-    MultimediaModule
+    MultimediaModule,
+    ControlStrategyModule
   ],
   controllers: [],
   providers: [...providerConfig],

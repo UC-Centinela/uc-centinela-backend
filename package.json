@@ -102,7 +102,8 @@
     "@authz": "src/authz",
     "@task": "src/task",
     "@critic-activity": "src/critic-activity",
-    "@multimedia": "src/multimedia"
+    "@multimedia": "src/multimedia",
+    "@control-strategy": "src/control-strategy"
   },
   "jest": {
     "moduleNameMapper": {
@@ -112,7 +113,8 @@
       "^@authz/(.*)$": "<rootDir>/authz/$1",
       "^@task/(.*)$": "<rootDir>/task/$1",
       "^@critic-activity/(.*)$": "<rootDir>/critic-activity/$1",
-      "^@multimedia/(.*)$": "<rootDir>/multimedia/$1"
+      "^@multimedia/(.*)$": "<rootDir>/multimedia/$1",
+      "^@control-strategy/(.*)$": "<rootDir>/control-strategy/$1"
     },
     "moduleFileExtensions": [
       "js",

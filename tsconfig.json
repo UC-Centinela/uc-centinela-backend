@@ -25,7 +25,8 @@
       "@authz/*": ["authz/*"],
       "@task/*": ["task/*"],
       "@critic-activity/*": ["critic-activity/*"],
-      "@multimedia/*": ["multimedia/*"]
+      "@multimedia/*": ["multimedia/*"],
+      "@control-strategy/*": ["control-strategy/*"],
       
     }
   },

@@ -48,6 +48,7 @@ model Task {
   revisorUserId      Int?
   criticActivities   CriticActivity[]
   multimedia Multimedia[]
+  controlStrategies  ControlStrategy[]
   creator            User             @relation("Creator", fields: [creatorUserId], references: [id])
   revisor            User?            @relation("Revisor", fields: [revisorUserId], references: [id])
 }
@@ -79,4 +80,14 @@ model Multimedia {
   task Task @relation(fields: [taskId], references: [id], map: "multimedia_taskId_fkey")
 
   @@map("Multimedia")
+}
+
+model ControlStrategy {
+  id     Int    @id @default(autoincrement())
+  title  String
+  taskId Int
+
+  task   Task   @relation(fields: [taskId], references: [id], map: "control_strategy_taskId_fkey")
+
+  @@map("ControlStrategy")
 }
