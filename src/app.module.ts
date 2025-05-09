@@ -23,6 +23,7 @@ import { MultimediaModule } from '@multimedia/infrastructure/multimedia.module'
 import { ControlStrategyModule } from '@control-strategy/infrastructure/control-strategy.module'
 import { ControlModule } from '@control/infrastructure/control.module'
 import { UndesiredEventModule } from '@undesired-event/infrastructure/undesired-event.module'
+import { VerificationQuestionModule } from '@verification-question/infrastructure/verification-question.module'
 
 // Control the guard access depending on the environment
 const authGuard = {
@@ -70,6 +71,7 @@ if (config.nodeEnv !== 'local') {
     ControlStrategyModule,
     ControlModule,
     UndesiredEventModule,
+    VerificationQuestionModule,
   ],
   controllers: [],
   providers: [...providerConfig],

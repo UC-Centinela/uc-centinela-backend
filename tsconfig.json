@@ -29,6 +29,7 @@
       "@control-strategy/*": ["control-strategy/*"],
       "@control/*": ["control/*"],
       "@undesired-event/*": ["undesired-event/*"],
+      "@verification-question/*": ["verification-question/*"],
       
     }
   },

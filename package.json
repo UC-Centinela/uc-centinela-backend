@@ -105,7 +105,8 @@
     "@multimedia": "src/multimedia",
     "@control-strategy": "src/control-strategy",
     "@control": "src/control",
-    "@undesired-event": "src/undesired-event"
+    "@undesired-event": "src/undesired-event",
+    "@verification-question": "src/verification-question"
   },
   "jest": {
     "moduleNameMapper": {
@@ -118,7 +119,8 @@
       "^@multimedia/(.*)$": "<rootDir>/multimedia/$1",
       "^@control-strategy/(.*)$": "<rootDir>/control-strategy/$1",
       "^@control/(.*)$": "<rootDir>/control/$1",
-      "^@undesired-event/(.*)$": "<rootDir>/undesired-event/$1"
+      "^@undesired-event/(.*)$": "<rootDir>/undesired-event/$1",
+      "^@verification-question/(.*)$": "<rootDir>/verification-question/$1"
     },
     "moduleFileExtensions": [
       "js",
