@@ -101,7 +101,8 @@
     "@logger": "./src/commons/infrastructure/logger/index",
     "@authz": "src/authz",
     "@task": "src/task",
-    "@critic-activity": "src/critic-activity"
+    "@critic-activity": "src/critic-activity",
+    "@multimedia": "src/multimedia"
   },
   "jest": {
     "moduleNameMapper": {
@@ -110,7 +111,8 @@
       "^@customer/(.*)$": "<rootDir>/customer/$1",
       "^@authz/(.*)$": "<rootDir>/authz/$1",
       "^@task/(.*)$": "<rootDir>/task/$1",
-      "^@critic-activity/(.*)$": "<rootDir>/critic-activity/$1"
+      "^@critic-activity/(.*)$": "<rootDir>/critic-activity/$1",
+      "^@multimedia/(.*)$": "<rootDir>/multimedia/$1"
     },
     "moduleFileExtensions": [
       "js",
