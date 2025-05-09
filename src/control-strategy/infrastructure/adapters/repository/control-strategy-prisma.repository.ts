@@ -9,7 +9,7 @@ export class ControlStrategyStorageAdapter implements IControlStrategyStorageAda
   constructor(private readonly storage: ControlStrategyStorage) {}
 
   async create(entity: ControlStrategy): Promise<ControlStrategy> {
-    const result = await this.storage.create({
+    const result = await this.storage.createControlStrategy({
       task: { connect: { id: entity.taskId } },
       title: entity.title
     })
@@ -18,17 +18,17 @@ export class ControlStrategyStorageAdapter implements IControlStrategyStorageAda
   }
 
   async findAll(): Promise<ControlStrategy[]> {
-    const result = await this.storage.findAll()
+    const result = await this.storage.controlStrategies()
     return result.map(mapPrismaControlStrategyToDomain)
   }
 
   async findOne(id: number): Promise<ControlStrategy> {
-    const result = await this.storage.findOne(id)
+    const result = await this.storage.controlStrategy(id)
     return mapPrismaControlStrategyToDomain(result)
   }
 
   async update(entity: ControlStrategy): Promise<ControlStrategy> {
-    const updated = await this.storage.update(entity.id, {
+    const updated = await this.storage.updateControlStrategy(entity.id, {
       title: entity.title
     })
 
@@ -36,7 +36,7 @@ export class ControlStrategyStorageAdapter implements IControlStrategyStorageAda
   }
 
   async delete(id: number): Promise<boolean> {
-    await this.storage.delete(id)
+    await this.storage.deleteControlStrategy(id)
     return true
   }
 }

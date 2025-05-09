@@ -27,6 +27,7 @@
       "@critic-activity/*": ["critic-activity/*"],
       "@multimedia/*": ["multimedia/*"],
       "@control-strategy/*": ["control-strategy/*"],
+      "@control/*": ["control/*"],
       
     }
   },

@@ -103,7 +103,8 @@
     "@task": "src/task",
     "@critic-activity": "src/critic-activity",
     "@multimedia": "src/multimedia",
-    "@control-strategy": "src/control-strategy"
+    "@control-strategy": "src/control-strategy",
+    "@control": "src/control"
   },
   "jest": {
     "moduleNameMapper": {
@@ -114,7 +115,8 @@
       "^@task/(.*)$": "<rootDir>/task/$1",
       "^@critic-activity/(.*)$": "<rootDir>/critic-activity/$1",
       "^@multimedia/(.*)$": "<rootDir>/multimedia/$1",
-      "^@control-strategy/(.*)$": "<rootDir>/control-strategy/$1"
+      "^@control-strategy/(.*)$": "<rootDir>/control-strategy/$1",
+      "^@control/(.*)$": "<rootDir>/control/$1"
     },
     "moduleFileExtensions": [
       "js",
