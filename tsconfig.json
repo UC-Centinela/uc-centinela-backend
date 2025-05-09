@@ -24,7 +24,9 @@
       "@user/*": ["user/*"],
       "@authz/*": ["authz/*"],
       "@task/*": ["task/*"],
-      "@critic-activity/*": ["critic-activity/*"]      
+      "@critic-activity/*": ["critic-activity/*"],
+      "@multimedia/*": ["multimedia/*"]
+      
     }
   },
   "include": ["src/**/*.ts"],

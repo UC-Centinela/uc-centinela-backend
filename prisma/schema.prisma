@@ -47,6 +47,7 @@ model Task {
   creatorUserId      Int
   revisorUserId      Int?
   criticActivities   CriticActivity[]
+  multimedia Multimedia[]
   creator            User             @relation("Creator", fields: [creatorUserId], references: [id])
   revisor            User?            @relation("Revisor", fields: [revisorUserId], references: [id])
 }
@@ -64,4 +65,18 @@ enum TaskState {
   IN_PROGRESS
   COMPLETED
   REVIEWED
+}
+
+model Multimedia {
+  id                 Int      @id @default(autoincrement())
+  taskId             Int
+  photoUrl           String?
+  videoUrl           String?
+  audioTranscription String?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  task Task @relation(fields: [taskId], references: [id], map: "multimedia_taskId_fkey")
+
+  @@map("Multimedia")
 }
