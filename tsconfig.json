@@ -28,6 +28,7 @@
       "@multimedia/*": ["multimedia/*"],
       "@control-strategy/*": ["control-strategy/*"],
       "@control/*": ["control/*"],
+      "@undesired-event/*": ["undesired-event/*"],
       
     }
   },

@@ -58,6 +58,7 @@ model CriticActivity {
   title  String
   taskId Int
   controls Control[]
+  undesiredEvents UndesiredEvent[]
   task   Task   @relation(fields: [taskId], references: [id], map: "critic_activities_taskId_fkey")
   @@map("CriticActivity")
 }
@@ -102,4 +103,15 @@ model Control {
   criticActivity   CriticActivity @relation(fields: [criticActivityId], references: [id], map: "control_criticActivityId_fkey")
 
   @@map("Control")
+}
+
+model UndesiredEvent {
+  id               Int    @id @default(autoincrement())
+  title            String
+  description      String?
+  criticActivityId Int
+
+criticActivity   CriticActivity @relation(fields: [criticActivityId], references: [id], map: "undesired_event_criticActivityId_fkey")
+
+  @@map("UndesiredEvent")
 }

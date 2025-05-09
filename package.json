@@ -104,7 +104,8 @@
     "@critic-activity": "src/critic-activity",
     "@multimedia": "src/multimedia",
     "@control-strategy": "src/control-strategy",
-    "@control": "src/control"
+    "@control": "src/control",
+    "@undesired-event": "src/undesired-event"
   },
   "jest": {
     "moduleNameMapper": {
@@ -116,7 +117,8 @@
       "^@critic-activity/(.*)$": "<rootDir>/critic-activity/$1",
       "^@multimedia/(.*)$": "<rootDir>/multimedia/$1",
       "^@control-strategy/(.*)$": "<rootDir>/control-strategy/$1",
-      "^@control/(.*)$": "<rootDir>/control/$1"
+      "^@control/(.*)$": "<rootDir>/control/$1",
+      "^@undesired-event/(.*)$": "<rootDir>/undesired-event/$1"
     },
     "moduleFileExtensions": [
       "js",
