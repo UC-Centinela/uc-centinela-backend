@@ -1,8 +1,8 @@
 import { CreateIdpUserDTO, IdpUserBody, IIdentityProviderService } from "@commons/domain/interfaces/identity-provider.interface"
 import { ILogger } from "@commons/domain/interfaces/logger.interface"
 import { CreateUserDTO } from "@user/domain/interfaces/user.interface"
-import { IUserStorageAdapter } from "user/domain/interfaces/user.repository"
-import { User } from "user/domain/user"
+import { IUserStorageAdapter } from "@user/domain/interfaces/user.repository"
+import { User } from "@user/domain/user"
 
 export class CreateUserUseCase {
   constructor (

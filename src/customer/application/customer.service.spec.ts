@@ -21,6 +21,27 @@ describe('CustomerService', () => {
           remove: jest.fn()
         }
       }
+      if (token === 'IUserService') {
+        return {
+          findAll: jest.fn().mockResolvedValue([]),
+          findOne: jest.fn().mockResolvedValue({}),
+          create: jest.fn().mockResolvedValue({}),
+          update: jest.fn().mockResolvedValue({}),
+          remove: jest.fn().mockResolvedValue({}),
+          findUsersByCustomer: jest.fn().mockResolvedValue([]),
+          syncUser: jest.fn().mockResolvedValue({}),
+          assignRole: jest.fn().mockResolvedValue({})
+        }
+      }
+      if (token === 'LOGGER') {
+        return {
+          log: jest.fn(),
+          error: jest.fn(),
+          warn: jest.fn(),
+          debug: jest.fn(),
+          setTraceContext: jest.fn()
+        }
+      }
       if (typeof token === 'function') {
         const mockMetadata = moduleMocker.getMetadata(token) as MockFunctionMetadata<any, any>
         const Mock = moduleMocker.generateFromMetadata(mockMetadata)
