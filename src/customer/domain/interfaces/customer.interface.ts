@@ -1,1 +1,1 @@
-export interface Customer {}
+export type Customer = object

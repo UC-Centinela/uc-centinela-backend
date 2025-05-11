@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common'
+import { Injectable } from '@nestjs/common'
 import { CreateTaskUseCase } from './use_cases/create-task.use-case'
 import { DeleteTaskUseCase } from './use_cases/delete-task.use-case'
 import { FindAllTaskUseCase } from './use_cases/find-all-task.use-case'
