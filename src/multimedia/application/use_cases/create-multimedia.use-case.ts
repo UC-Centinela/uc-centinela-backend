@@ -5,9 +5,9 @@ import { Multimedia } from '@multimedia/domain/multimedia'
 
 @Injectable()
 export class CreateMultimediaUseCase {
-  constructor(private readonly storage: IMultimediaStorageAdapter) {}
+  constructor (private readonly storage: IMultimediaStorageAdapter) {}
 
-  execute(dto: CreateMultimediaDTO): Promise<Multimedia> {
+  execute (dto: CreateMultimediaDTO): Promise<Multimedia> {
     const multimedia = Multimedia.create(dto)
     return this.storage.create(multimedia)
   }

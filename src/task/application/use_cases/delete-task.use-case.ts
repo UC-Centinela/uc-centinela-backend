@@ -3,9 +3,9 @@ import { ITaskStorageAdapter } from '@task/domain/interfaces/task.repository'
 
 @Injectable()
 export class DeleteTaskUseCase {
-  constructor(private readonly storage: ITaskStorageAdapter) {}
+  constructor (private readonly storage: ITaskStorageAdapter) {}
 
-  execute(id: number): Promise<boolean> {
+  execute (id: number): Promise<boolean> {
     return this.storage.delete(id)
   }
 }

@@ -6,9 +6,9 @@ import { mapPrismaUndesiredEventToDomain } from './undesired-event.utils'
 
 @Injectable()
 export class UndesiredEventStorageAdapter implements IUndesiredEventStorageAdapter {
-  constructor(private readonly storage: UndesiredEventStorage) {}
+  constructor (private readonly storage: UndesiredEventStorage) {}
 
-  async create(entity: UndesiredEvent): Promise<UndesiredEvent> {
+  async create (entity: UndesiredEvent): Promise<UndesiredEvent> {
     const result = await this.storage.createUndesiredEvent({
       criticActivity: { connect: { id: entity.criticActivityId } },
       title: entity.title,
@@ -18,17 +18,17 @@ export class UndesiredEventStorageAdapter implements IUndesiredEventStorageAdapt
     return mapPrismaUndesiredEventToDomain(result)
   }
 
-  async findAll(): Promise<UndesiredEvent[]> {
+  async findAll (): Promise<UndesiredEvent[]> {
     const result = await this.storage.undesiredEvents()
     return result.map(mapPrismaUndesiredEventToDomain)
   }
 
-  async findOne(id: number): Promise<UndesiredEvent> {
+  async findOne (id: number): Promise<UndesiredEvent> {
     const result = await this.storage.undesiredEvent(id)
     return mapPrismaUndesiredEventToDomain(result)
   }
 
-  async update(entity: UndesiredEvent): Promise<UndesiredEvent> {
+  async update (entity: UndesiredEvent): Promise<UndesiredEvent> {
     const result = await this.storage.updateUndesiredEvent(entity.id, {
       title: entity.title,
       description: entity.description
@@ -37,12 +37,12 @@ export class UndesiredEventStorageAdapter implements IUndesiredEventStorageAdapt
     return mapPrismaUndesiredEventToDomain(result)
   }
 
-  async delete(id: number): Promise<boolean> {
+  async delete (id: number): Promise<boolean> {
     await this.storage.deleteUndesiredEvent(id)
     return true
   }
 
-  async findAllByCriticActivityId(criticActivityId: number): Promise<UndesiredEvent[]> {
+  async findAllByCriticActivityId (criticActivityId: number): Promise<UndesiredEvent[]> {
     const result = await this.storage.findAllByCriticActivityId(criticActivityId)
     return result.map(mapPrismaUndesiredEventToDomain)
   }

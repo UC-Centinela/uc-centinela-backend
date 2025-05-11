@@ -17,23 +17,23 @@ export class ControlStrategyService implements IControlStrategyService {
     private readonly deleteUseCase: DeleteControlStrategyUseCase
   ) {}
 
-  create(dto: CreateControlStrategyDTO): Promise<ControlStrategy> {
+  create (dto: CreateControlStrategyDTO): Promise<ControlStrategy> {
     return this.createUseCase.execute(dto)
   }
 
-  findAll(): Promise<ControlStrategy[]> {
+  findAll (): Promise<ControlStrategy[]> {
     return this.findAllUseCase.execute()
   }
 
-  findOne(id: number): Promise<ControlStrategy> {
+  findOne (id: number): Promise<ControlStrategy> {
     return this.findOneUseCase.execute(id)
   }
 
-  update(dto: UpdateControlStrategyDTO): Promise<ControlStrategy> {
+  update (dto: UpdateControlStrategyDTO): Promise<ControlStrategy> {
     return this.updateUseCase.execute(dto)
   }
 
-  delete(id: number): Promise<boolean> {
+  delete (id: number): Promise<boolean> {
     return this.deleteUseCase.execute(id)
   }
 }

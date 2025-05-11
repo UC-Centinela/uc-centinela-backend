@@ -5,25 +5,27 @@ interface ControlStrategyProps {
 }
 
 export class ControlStrategy {
-  private readonly props: ControlStrategyProps;
+  private readonly props: ControlStrategyProps
 
-  private constructor(props: ControlStrategyProps) {
-    this.props = Object.freeze({ ...props });
+  private constructor (props: ControlStrategyProps) {
+    this.props = Object.freeze({ ...props })
   }
 
-  get id() { return this.props.id; }
-  get taskId() { return this.props.taskId; }
-  get title() { return this.props.title; }
+  get id () { return this.props.id }
 
-  static create(props: Omit<ControlStrategyProps, 'id'>): ControlStrategy {
-    return new ControlStrategy(props);
+  get taskId () { return this.props.taskId }
+
+  get title () { return this.props.title }
+
+  static create (props: Omit<ControlStrategyProps, 'id'>): ControlStrategy {
+    return new ControlStrategy(props)
   }
 
-  update(props: Partial<ControlStrategyProps>): ControlStrategy {
-    return new ControlStrategy({ ...this.props, ...props });
+  update (props: Partial<ControlStrategyProps>): ControlStrategy {
+    return new ControlStrategy({ ...this.props, ...props })
   }
 
-  static reconstitute(props: ControlStrategyProps): ControlStrategy {
-    return new ControlStrategy(props);
+  static reconstitute (props: ControlStrategyProps): ControlStrategy {
+    return new ControlStrategy(props)
   }
 }

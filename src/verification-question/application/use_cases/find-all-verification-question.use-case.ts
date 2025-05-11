@@ -4,9 +4,9 @@ import { VerificationQuestion } from '@verification-question/domain/verification
 
 @Injectable()
 export class FindAllVerificationQuestionUseCase {
-  constructor(private readonly storage: IVerificationQuestionStorageAdapter) {}
+  constructor (private readonly storage: IVerificationQuestionStorageAdapter) {}
 
-  execute(): Promise<VerificationQuestion[]> {
+  execute (): Promise<VerificationQuestion[]> {
     return this.storage.findAll()
   }
 }

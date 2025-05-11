@@ -14,7 +14,6 @@ import { FindAllCriticActivityUseCase } from '@critic-activity/application/use_c
 import { FindOneCriticActivityUseCase } from '@critic-activity/application/use_cases/find-one-critic-activity.use-case'
 import { FindByTaskIdCriticActivityUseCase } from '@critic-activity/application/use_cases/find-by-task-id-critic-activity.use-case'
 
-
 @Module({
   imports: [CommonsModule],
   providers: [

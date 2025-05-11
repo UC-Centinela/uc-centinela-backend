@@ -18,29 +18,29 @@ export class ControlResolver {
 
   @Permissions('create:control')
   @Mutation(() => Control)
-  createControl(@Args('input') input: CreateControlInput) {
+  createControl (@Args('input') input: CreateControlInput) {
     this.logger.debug('[createControl] Creating...')
     return this.service.create(input)
   }
 
   @Query(() => [Control])
-  findAllControls() {
+  findAllControls () {
     this.logger.debug('[findAll] Fetching all...')
     return this.service.findAll()
   }
 
   @Query(() => Control)
-  findControl(@Args('id', { type: () => Int }) id: number) {
+  findControl (@Args('id', { type: () => Int }) id: number) {
     return this.service.findOne(id)
   }
 
   @Mutation(() => Control)
-  updateControl(@Args('input') input: UpdateControlInput) {
+  updateControl (@Args('input') input: UpdateControlInput) {
     return this.service.update({ id: input.id, updateControl: input })
   }
 
   @Mutation(() => Boolean)
-  deleteControl(@Args('id', { type: () => Int }) id: number) {
+  deleteControl (@Args('id', { type: () => Int }) id: number) {
     return this.service.delete(id)
   }
 }

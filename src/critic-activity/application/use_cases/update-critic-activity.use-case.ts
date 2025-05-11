@@ -5,9 +5,9 @@ import { CriticActivity } from '@critic-activity/domain/critic-activity'
 
 @Injectable()
 export class UpdateCriticActivityUseCase {
-  constructor(private readonly storage: ICriticActivityStorageAdapter) {}
+  constructor (private readonly storage: ICriticActivityStorageAdapter) {}
 
-  execute(dto: UpdateCriticActivityDTO): Promise<CriticActivity> {
+  execute (dto: UpdateCriticActivityDTO): Promise<CriticActivity> {
     const updated = CriticActivity.reconstitute({ id: dto.id, ...dto.updateCriticActivity } as any)
     return this.storage.update(updated)
   }

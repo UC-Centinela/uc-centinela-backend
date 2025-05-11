@@ -18,34 +18,34 @@ export class VerificationQuestionResolver {
 
   @Permissions('create:verification-question')
   @Mutation(() => VerificationQuestion)
-  createVerificationQuestion(@Args('input') input: CreateVerificationQuestionInput) {
+  createVerificationQuestion (@Args('input') input: CreateVerificationQuestionInput) {
     this.logger.debug('[createVerificationQuestion] Creating...')
     return this.service.create(input)
   }
 
   @Query(() => [VerificationQuestion])
-  findAllVerificationQuestions() {
+  findAllVerificationQuestions () {
     this.logger.debug('[findAll] Fetching all...')
     return this.service.findAll()
   }
 
   @Query(() => VerificationQuestion)
-  findVerificationQuestion(@Args('id', { type: () => Int }) id: number) {
+  findVerificationQuestion (@Args('id', { type: () => Int }) id: number) {
     return this.service.findOne(id)
   }
 
   @Query(() => [VerificationQuestion])
-  findVerificationQuestionsByCriticActivity(@Args('criticActivityId', { type: () => Int }) id: number) {
+  findVerificationQuestionsByCriticActivity (@Args('criticActivityId', { type: () => Int }) id: number) {
     return this.service.findAllByCriticActivityId(id)
   }
 
   @Mutation(() => VerificationQuestion)
-  updateVerificationQuestion(@Args('input') input: UpdateVerificationQuestionInput) {
+  updateVerificationQuestion (@Args('input') input: UpdateVerificationQuestionInput) {
     return this.service.update({ id: input.id, updateVerificationQuestion: input })
   }
 
   @Mutation(() => Boolean)
-  deleteVerificationQuestion(@Args('id', { type: () => Int }) id: number) {
+  deleteVerificationQuestion (@Args('id', { type: () => Int }) id: number) {
     return this.service.delete(id)
   }
 }

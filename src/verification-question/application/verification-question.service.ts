@@ -19,27 +19,27 @@ export class VerificationQuestionService implements IVerificationQuestionService
     private readonly findByCriticActivityUseCase: FindByCriticActivityIdVerificationQuestionUseCase
   ) {}
 
-  create(dto: CreateVerificationQuestionDTO): Promise<VerificationQuestion> {
+  create (dto: CreateVerificationQuestionDTO): Promise<VerificationQuestion> {
     return this.createUseCase.execute(dto)
   }
 
-  findAll(): Promise<VerificationQuestion[]> {
+  findAll (): Promise<VerificationQuestion[]> {
     return this.findAllUseCase.execute()
   }
 
-  findOne(id: number): Promise<VerificationQuestion> {
+  findOne (id: number): Promise<VerificationQuestion> {
     return this.findOneUseCase.execute(id)
   }
 
-  update(dto: UpdateVerificationQuestionDTO): Promise<VerificationQuestion> {
+  update (dto: UpdateVerificationQuestionDTO): Promise<VerificationQuestion> {
     return this.updateUseCase.execute(dto)
   }
 
-  delete(id: number): Promise<boolean> {
+  delete (id: number): Promise<boolean> {
     return this.deleteUseCase.execute(id)
   }
 
-  findAllByCriticActivityId(criticActivityId: number): Promise<VerificationQuestion[]> {
+  findAllByCriticActivityId (criticActivityId: number): Promise<VerificationQuestion[]> {
     return this.findByCriticActivityUseCase.execute(criticActivityId)
   }
 }

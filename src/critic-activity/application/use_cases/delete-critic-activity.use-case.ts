@@ -3,9 +3,9 @@ import { ICriticActivityStorageAdapter } from '@critic-activity/domain/interface
 
 @Injectable()
 export class DeleteCriticActivityUseCase {
-  constructor(private readonly storage: ICriticActivityStorageAdapter) {}
+  constructor (private readonly storage: ICriticActivityStorageAdapter) {}
 
-  execute(id: number): Promise<boolean> {
+  execute (id: number): Promise<boolean> {
     return this.storage.delete(id)
   }
 }

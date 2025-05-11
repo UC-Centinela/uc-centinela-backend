@@ -3,9 +3,9 @@ import { IControlStrategyStorageAdapter } from '@control-strategy/domain/interfa
 
 @Injectable()
 export class DeleteControlStrategyUseCase {
-  constructor(private readonly storage: IControlStrategyStorageAdapter) {}
+  constructor (private readonly storage: IControlStrategyStorageAdapter) {}
 
-  execute(id: number): Promise<boolean> {
+  execute (id: number): Promise<boolean> {
     return this.storage.delete(id)
   }
 }

@@ -1,4 +1,4 @@
-import { VerificationQuestion } from '../verification-question';
+import { VerificationQuestion } from '../verification-question'
 
 export interface CreateVerificationQuestionDTO {
   criticActivityId: number;

@@ -4,9 +4,9 @@ import { CriticActivity } from '@critic-activity/domain/critic-activity'
 
 @Injectable()
 export class FindByTaskIdCriticActivityUseCase {
-  constructor(private readonly storage: ICriticActivityStorageAdapter) {}
+  constructor (private readonly storage: ICriticActivityStorageAdapter) {}
 
-  execute(taskId: number): Promise<CriticActivity[]> {
+  execute (taskId: number): Promise<CriticActivity[]> {
     return this.storage.findAllByTaskId(taskId)
   }
 }

@@ -18,34 +18,34 @@ export class UndesiredEventResolver {
 
   @Permissions('create:undesired-event')
   @Mutation(() => UndesiredEvent)
-  createUndesiredEvent(@Args('input') input: CreateUndesiredEventInput) {
+  createUndesiredEvent (@Args('input') input: CreateUndesiredEventInput) {
     this.logger.debug('[createUndesiredEvent] Creating...')
     return this.service.create(input)
   }
 
   @Query(() => [UndesiredEvent])
-  findAllUndesiredEvents() {
+  findAllUndesiredEvents () {
     this.logger.debug('[findAll] Fetching all...')
     return this.service.findAll()
   }
 
   @Query(() => UndesiredEvent)
-  findUndesiredEvent(@Args('id', { type: () => Int }) id: number) {
+  findUndesiredEvent (@Args('id', { type: () => Int }) id: number) {
     return this.service.findOne(id)
   }
 
   @Query(() => [UndesiredEvent])
-  findUndesiredEventsByCriticActivity(@Args('criticActivityId', { type: () => Int }) id: number) {
+  findUndesiredEventsByCriticActivity (@Args('criticActivityId', { type: () => Int }) id: number) {
     return this.service.findAllByCriticActivityId(id)
   }
 
   @Mutation(() => UndesiredEvent)
-  updateUndesiredEvent(@Args('input') input: UpdateUndesiredEventInput) {
+  updateUndesiredEvent (@Args('input') input: UpdateUndesiredEventInput) {
     return this.service.update({ id: input.id, updateUndesiredEvent: input })
   }
 
   @Mutation(() => Boolean)
-  deleteUndesiredEvent(@Args('id', { type: () => Int }) id: number) {
+  deleteUndesiredEvent (@Args('id', { type: () => Int }) id: number) {
     return this.service.delete(id)
   }
 }

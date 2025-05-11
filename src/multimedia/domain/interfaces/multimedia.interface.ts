@@ -1,4 +1,4 @@
-import { Multimedia } from '../multimedia';
+import { Multimedia } from '../multimedia'
 
 export interface CreateMultimediaDTO {
   taskId: number;

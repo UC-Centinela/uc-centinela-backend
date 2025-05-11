@@ -8,10 +8,9 @@ import { FindOneCriticActivityUseCase } from './use_cases/find-one-critic-activi
 import { DeleteCriticActivityUseCase } from './use_cases/delete-critic-activity.use-case'
 import { FindByTaskIdCriticActivityUseCase } from './use_cases/find-by-task-id-critic-activity.use-case'
 
-
 @Injectable()
 export class CriticActivityService implements ICriticActivityService {
-  constructor(
+  constructor (
     private readonly createUC: CreateCriticActivityUseCase,
     private readonly updateUC: UpdateCriticActivityUseCase,
     private readonly findAllUC: FindAllCriticActivityUseCase,
@@ -20,27 +19,27 @@ export class CriticActivityService implements ICriticActivityService {
     private readonly findByTaskUC: FindByTaskIdCriticActivityUseCase
   ) {}
 
-  create(dto: CreateCriticActivityDTO): Promise<CriticActivity> {
+  create (dto: CreateCriticActivityDTO): Promise<CriticActivity> {
     return this.createUC.execute(dto)
   }
 
-  findAll(): Promise<CriticActivity[]> {
+  findAll (): Promise<CriticActivity[]> {
     return this.findAllUC.execute()
   }
 
-  findOne(id: number): Promise<CriticActivity> {
+  findOne (id: number): Promise<CriticActivity> {
     return this.findOneUC.execute(id)
   }
 
-  update(dto: UpdateCriticActivityDTO): Promise<CriticActivity> {
+  update (dto: UpdateCriticActivityDTO): Promise<CriticActivity> {
     return this.updateUC.execute(dto)
   }
 
-  delete(id: number): Promise<boolean> {
+  delete (id: number): Promise<boolean> {
     return this.deleteUC.execute(id)
   }
 
-  findAllByTaskId(taskId: number): Promise<CriticActivity[]> {
+  findAllByTaskId (taskId: number): Promise<CriticActivity[]> {
     return this.findByTaskUC.execute(taskId)
   }
   

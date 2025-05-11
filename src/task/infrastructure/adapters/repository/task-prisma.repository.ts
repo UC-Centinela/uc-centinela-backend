@@ -6,9 +6,9 @@ import { mapPrismaTaskToDomain } from './task.utils'
 
 @Injectable()
 export class TaskStorageAdapter implements ITaskStorageAdapter {
-  constructor(private readonly storage: TaskStorage) {}
+  constructor (private readonly storage: TaskStorage) {}
 
-  async create(task: Task): Promise<Task> {
+  async create (task: Task): Promise<Task> {
     const created = await this.storage.createTask({
       title: task.title,
       instruction: task.instruction,
@@ -24,17 +24,17 @@ export class TaskStorageAdapter implements ITaskStorageAdapter {
     return mapPrismaTaskToDomain(created)
   }
 
-  async findAll(): Promise<Task[]> {
+  async findAll (): Promise<Task[]> {
     const tasks = await this.storage.tasks()
     return tasks.map(mapPrismaTaskToDomain)
   }
 
-  async findOne(id: number): Promise<Task> {
+  async findOne (id: number): Promise<Task> {
     const task = await this.storage.task(id)
     return mapPrismaTaskToDomain(task)
   }
 
-  async update(task: Task): Promise<Task> {
+  async update (task: Task): Promise<Task> {
     const updated = await this.storage.updateTask(task.id, {
       title: task.title,
       instruction: task.instruction,
@@ -50,7 +50,7 @@ export class TaskStorageAdapter implements ITaskStorageAdapter {
     return mapPrismaTaskToDomain(updated)
   }
 
-  async delete(id: number): Promise<boolean> {
+  async delete (id: number): Promise<boolean> {
     await this.storage.deleteTask(id)
     return true
   }

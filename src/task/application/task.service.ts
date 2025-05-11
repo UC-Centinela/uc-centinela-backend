@@ -17,23 +17,23 @@ export class TaskService implements ITaskService {
     private readonly deleteTask: DeleteTaskUseCase
   ) {}
 
-  create(dto: CreateTaskDTO): Promise<Task> {
+  create (dto: CreateTaskDTO): Promise<Task> {
     return this.createTask.execute(dto)
   }
 
-  findAll(): Promise<Task[]> {
+  findAll (): Promise<Task[]> {
     return this.findAllTask.execute()
   }
 
-  findOne(id: number): Promise<Task> {
+  findOne (id: number): Promise<Task> {
     return this.findOneTask.execute(id)
   }
 
-  update(dto: UpdateTaskDTO): Promise<Task> {
+  update (dto: UpdateTaskDTO): Promise<Task> {
     return this.updateTask.execute(dto)
   }
 
-  delete(id: number): Promise<boolean> {
+  delete (id: number): Promise<boolean> {
     return this.deleteTask.execute(id)
   }
 }

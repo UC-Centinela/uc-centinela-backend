@@ -5,9 +5,9 @@ import { UndesiredEvent } from '@undesired-event/domain/undesired-event'
 
 @Injectable()
 export class CreateUndesiredEventUseCase {
-  constructor(private readonly storage: IUndesiredEventStorageAdapter) {}
+  constructor (private readonly storage: IUndesiredEventStorageAdapter) {}
 
-  execute(dto: CreateUndesiredEventDTO): Promise<UndesiredEvent> {
+  execute (dto: CreateUndesiredEventDTO): Promise<UndesiredEvent> {
     const entity = UndesiredEvent.create(dto)
     return this.storage.create(entity)
   }

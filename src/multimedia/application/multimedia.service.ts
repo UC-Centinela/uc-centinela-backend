@@ -17,23 +17,23 @@ export class MultimediaService implements IMultimediaService {
     private readonly deleteMultimedia: DeleteMultimediaUseCase
   ) {}
 
-  create(dto: CreateMultimediaDTO): Promise<Multimedia> {
+  create (dto: CreateMultimediaDTO): Promise<Multimedia> {
     return this.createMultimedia.execute(dto)
   }
 
-  findAll(): Promise<Multimedia[]> {
+  findAll (): Promise<Multimedia[]> {
     return this.findAllMultimedia.execute()
   }
 
-  findOne(id: number): Promise<Multimedia> {
+  findOne (id: number): Promise<Multimedia> {
     return this.findOneMultimedia.execute(id)
   }
 
-  update(dto: UpdateMultimediaDTO): Promise<Multimedia> {
+  update (dto: UpdateMultimediaDTO): Promise<Multimedia> {
     return this.updateMultimedia.execute(dto)
   }
 
-  delete(id: number): Promise<boolean> {
+  delete (id: number): Promise<boolean> {
     return this.deleteMultimedia.execute(id)
   }
 }

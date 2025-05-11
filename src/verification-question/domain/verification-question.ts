@@ -6,26 +6,29 @@ interface VerificationQuestionProps {
 }
 
 export class VerificationQuestion {
-  private readonly props: VerificationQuestionProps;
+  private readonly props: VerificationQuestionProps
 
-  private constructor(props: VerificationQuestionProps) {
-    this.props = Object.freeze({ ...props });
+  private constructor (props: VerificationQuestionProps) {
+    this.props = Object.freeze({ ...props })
   }
 
-  get id() { return this.props.id; }
-  get criticActivityId() { return this.props.criticActivityId; }
-  get title() { return this.props.title; }
-  get description() { return this.props.description; }
+  get id () { return this.props.id }
 
-  static create(props: Omit<VerificationQuestionProps, 'id'>): VerificationQuestion {
-    return new VerificationQuestion(props);
+  get criticActivityId () { return this.props.criticActivityId }
+
+  get title () { return this.props.title }
+
+  get description () { return this.props.description }
+
+  static create (props: Omit<VerificationQuestionProps, 'id'>): VerificationQuestion {
+    return new VerificationQuestion(props)
   }
 
-  update(props: Partial<VerificationQuestionProps>): VerificationQuestion {
-    return new VerificationQuestion({ ...this.props, ...props });
+  update (props: Partial<VerificationQuestionProps>): VerificationQuestion {
+    return new VerificationQuestion({ ...this.props, ...props })
   }
 
-  static reconstitute(props: VerificationQuestionProps): VerificationQuestion {
-    return new VerificationQuestion(props);
+  static reconstitute (props: VerificationQuestionProps): VerificationQuestion {
+    return new VerificationQuestion(props)
   }
 }
