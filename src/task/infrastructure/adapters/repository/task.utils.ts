@@ -8,14 +8,13 @@ const mapPrismaTaskToDomain = (data: PrismaTask): Task => {
     instruction: data.instruction,
     comments: data.comments,
     state: data.state as TaskState,
-    videoUrl: data.videoUrl,
-    audioTranscription: data.audioTranscription,
     assignationDate: data.assignationDate,
     requiredSendDate: data.requiredSendDate,
     creatorUserId: data.creatorUserId,
     revisorUserId: data.revisorUserId,
     createdAt: data.createdAt,
-    updatedAt: data.updatedAt
+    updatedAt: data.updatedAt,
+    changeHistory: data.changeHistory,
   })
 }
 

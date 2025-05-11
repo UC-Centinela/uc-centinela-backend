@@ -5,12 +5,11 @@ export interface CreateTaskDTO {
   instruction: string;
   comments?: string;
   state: TaskState;
-  videoUrl?: string;
-  audioTranscription?: string;
   assignationDate?: Date;
   requiredSendDate?: Date;
   creatorUserId: number;
   revisorUserId?: number;
+  changeHistory?: string;
 }
 
 export interface UpdateTaskDTO {

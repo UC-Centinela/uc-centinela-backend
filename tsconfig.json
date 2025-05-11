@@ -24,7 +24,13 @@
       "@user/*": ["user/*"],
       "@authz/*": ["authz/*"],
       "@task/*": ["task/*"],
-      "@critic-activity/*": ["critic-activity/*"]      
+      "@critic-activity/*": ["critic-activity/*"],
+      "@multimedia/*": ["multimedia/*"],
+      "@control-strategy/*": ["control-strategy/*"],
+      "@control/*": ["control/*"],
+      "@undesired-event/*": ["undesired-event/*"],
+      "@verification-question/*": ["verification-question/*"],
+      
     }
   },
   "include": ["src/**/*.ts"],

@@ -59,8 +59,7 @@ type Task {
   instruction: String!
   comments: String
   state: TaskState!
-  videoUrl: String
-  audioTranscription: String
+  changeHistory: String
   assignationDate: DateTime
   requiredSendDate: DateTime
   creatorUserId: Int!
@@ -79,6 +78,41 @@ type CriticActivity {
   id: Int!
   title: String!
   taskId: Int!
+}
+
+type Multimedia {
+  id: Int!
+  taskId: Int!
+  photoUrl: String
+  videoUrl: String
+  audioTranscription: String
+}
+
+type ControlStrategy {
+  id: Int!
+  taskId: Int!
+  title: String!
+}
+
+type Control {
+  id: Int!
+  criticActivityId: Int!
+  title: String!
+  description: String
+}
+
+type UndesiredEvent {
+  id: Int!
+  criticActivityId: Int!
+  title: String!
+  description: String
+}
+
+type VerificationQuestion {
+  id: Int!
+  criticActivityId: Int!
+  title: String!
+  description: String
 }
 
 type Query {
@@ -101,6 +135,18 @@ type Query {
   findAllCriticActivities: [CriticActivity!]!
   findCriticActivity(id: Float!): CriticActivity!
   findAllCriticActivitiesByTask(taskId: Float!): [CriticActivity!]!
+  findAllMultimedia: [Multimedia!]!
+  findMultimedia(id: Int!): Multimedia!
+  findAllControlStrategies: [ControlStrategy!]!
+  findControlStrategy(id: Int!): ControlStrategy!
+  findAllControls: [Control!]!
+  findControl(id: Int!): Control!
+  findAllUndesiredEvents: [UndesiredEvent!]!
+  findUndesiredEvent(id: Int!): UndesiredEvent!
+  findUndesiredEventsByCriticActivity(criticActivityId: Int!): [UndesiredEvent!]!
+  findAllVerificationQuestions: [VerificationQuestion!]!
+  findVerificationQuestion(id: Int!): VerificationQuestion!
+  findVerificationQuestionsByCriticActivity(criticActivityId: Int!): [VerificationQuestion!]!
 }
 
 type Mutation {
@@ -134,6 +180,21 @@ type Mutation {
   createCriticActivity(input: CreateCriticActivityInput!): CriticActivity!
   updateCriticActivity(input: UpdateCriticActivityInput!): CriticActivity!
   deleteCriticActivity(id: Float!): Boolean!
+  createMultimedia(input: CreateMultimediaInput!): Multimedia!
+  updateMultimedia(input: UpdateMultimediaInput!): Multimedia!
+  deleteMultimedia(id: Int!): Boolean!
+  createControlStrategy(input: CreateControlStrategyInput!): ControlStrategy!
+  updateControlStrategy(input: UpdateControlStrategyInput!): ControlStrategy!
+  deleteControlStrategy(id: Int!): Boolean!
+  createControl(input: CreateControlInput!): Control!
+  updateControl(input: UpdateControlInput!): Control!
+  deleteControl(id: Int!): Boolean!
+  createUndesiredEvent(input: CreateUndesiredEventInput!): UndesiredEvent!
+  updateUndesiredEvent(input: UpdateUndesiredEventInput!): UndesiredEvent!
+  deleteUndesiredEvent(id: Int!): Boolean!
+  createVerificationQuestion(input: CreateVerificationQuestionInput!): VerificationQuestion!
+  updateVerificationQuestion(input: UpdateVerificationQuestionInput!): VerificationQuestion!
+  deleteVerificationQuestion(id: Int!): Boolean!
 }
 
 input CreateUserInput {
@@ -218,8 +279,7 @@ input CreateTaskInput {
   instruction: String!
   state: TaskState!
   comments: String
-  videoUrl: String
-  audioTranscription: String
+  changeHistory: String
   assignationDate: DateTime
   requiredSendDate: DateTime
   creatorUserId: Float!
@@ -231,8 +291,7 @@ input UpdateTaskInput {
   instruction: String
   state: TaskState
   comments: String
-  videoUrl: String
-  audioTranscription: String
+  changeHistory: String
   assignationDate: DateTime
   requiredSendDate: DateTime
   creatorUserId: Float
@@ -248,5 +307,70 @@ input CreateCriticActivityInput {
 input UpdateCriticActivityInput {
   title: String
   taskId: Int
+  id: Int!
+}
+
+input CreateMultimediaInput {
+  taskId: Int!
+  photoUrl: String
+  videoUrl: String
+  audioTranscription: String
+}
+
+input UpdateMultimediaInput {
+  taskId: Int
+  photoUrl: String
+  videoUrl: String
+  audioTranscription: String
+  id: Int!
+}
+
+input CreateControlStrategyInput {
+  title: String!
+  taskId: Int!
+}
+
+input UpdateControlStrategyInput {
+  title: String
+  taskId: Int
+  id: Int!
+}
+
+input CreateControlInput {
+  title: String!
+  description: String
+  criticActivityId: Int!
+}
+
+input UpdateControlInput {
+  title: String
+  description: String
+  criticActivityId: Int
+  id: Int!
+}
+
+input CreateUndesiredEventInput {
+  title: String!
+  description: String
+  criticActivityId: Int!
+}
+
+input UpdateUndesiredEventInput {
+  title: String
+  description: String
+  criticActivityId: Int
+  id: Int!
+}
+
+input CreateVerificationQuestionInput {
+  title: String!
+  description: String
+  criticActivityId: Int!
+}
+
+input UpdateVerificationQuestionInput {
+  title: String
+  description: String
+  criticActivityId: Int
   id: Int!
 }

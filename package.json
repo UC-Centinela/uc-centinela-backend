@@ -101,7 +101,12 @@
     "@logger": "./src/commons/infrastructure/logger/index",
     "@authz": "src/authz",
     "@task": "src/task",
-    "@critic-activity": "src/critic-activity"
+    "@critic-activity": "src/critic-activity",
+    "@multimedia": "src/multimedia",
+    "@control-strategy": "src/control-strategy",
+    "@control": "src/control",
+    "@undesired-event": "src/undesired-event",
+    "@verification-question": "src/verification-question"
   },
   "jest": {
     "moduleNameMapper": {
@@ -110,7 +115,12 @@
       "^@customer/(.*)$": "<rootDir>/customer/$1",
       "^@authz/(.*)$": "<rootDir>/authz/$1",
       "^@task/(.*)$": "<rootDir>/task/$1",
-      "^@critic-activity/(.*)$": "<rootDir>/critic-activity/$1"
+      "^@critic-activity/(.*)$": "<rootDir>/critic-activity/$1",
+      "^@multimedia/(.*)$": "<rootDir>/multimedia/$1",
+      "^@control-strategy/(.*)$": "<rootDir>/control-strategy/$1",
+      "^@control/(.*)$": "<rootDir>/control/$1",
+      "^@undesired-event/(.*)$": "<rootDir>/undesired-event/$1",
+      "^@verification-question/(.*)$": "<rootDir>/verification-question/$1"
     },
     "moduleFileExtensions": [
       "js",

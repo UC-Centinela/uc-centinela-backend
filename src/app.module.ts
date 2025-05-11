@@ -18,8 +18,12 @@ import { PerrmissionsGuard } from 'authz/permissions.guard'
 import { RolesGuard } from 'authz/roles.guard'
 import { CustomerAccessGuard } from 'authz/customer-access.guard'
 import { TaskModule } from '@task/infrastructure/task.module'
-import { CriticActivity } from '@critic-activity/domain/critic-activity'
 import { CriticActivityModule } from '@critic-activity/infrastructure/critic-activity.module'
+import { MultimediaModule } from '@multimedia/infrastructure/multimedia.module'
+import { ControlStrategyModule } from '@control-strategy/infrastructure/control-strategy.module'
+import { ControlModule } from '@control/infrastructure/control.module'
+import { UndesiredEventModule } from '@undesired-event/infrastructure/undesired-event.module'
+import { VerificationQuestionModule } from '@verification-question/infrastructure/verification-question.module'
 
 // Control the guard access depending on the environment
 const authGuard = {
@@ -57,12 +61,17 @@ if (config.nodeEnv !== 'local') {
       installSubscriptionHandlers: true,
       playground: false,
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
-    }), //Define donde se guarda el schema
+    }),
     UserModule,
     CustomerModule,
     AuthzModule,
     TaskModule,
-    CriticActivityModule
+    CriticActivityModule,
+    MultimediaModule,
+    ControlStrategyModule,
+    ControlModule,
+    UndesiredEventModule,
+    VerificationQuestionModule,
   ],
   controllers: [],
   providers: [...providerConfig],
