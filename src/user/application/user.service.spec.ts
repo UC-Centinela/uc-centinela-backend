@@ -22,6 +22,23 @@ describe('UserService', () => {
           remove: jest.fn()
         }
       }
+      if (token === 'AUTH0_IDENTITY_PROVIDER_SERVICE') {
+        return {
+          createUser: jest.fn(),
+          getUser: jest.fn(),
+          changePassword: jest.fn(),
+          assignRole: jest.fn()
+        }
+      }
+      if (token === 'LOGGER') {
+        return {
+          log: jest.fn(),
+          error: jest.fn(),
+          warn: jest.fn(),
+          debug: jest.fn(),
+          setTraceContext: jest.fn()
+        }
+      }
       if (typeof token === 'function') {
         const mockMetadata = moduleMocker.getMetadata(token) as MockFunctionMetadata<any, any>
         const Mock = moduleMocker.generateFromMetadata(mockMetadata)

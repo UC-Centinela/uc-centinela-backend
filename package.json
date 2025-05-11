@@ -22,8 +22,10 @@
     "commit": "git-cz",
     "prisma:client": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
+    "prisma:migrate:reset": "prisma migrate reset",
     "prisma:deploy": "prisma migrate deploy",
-    "prisma:seed": "ts-node --transpile-only prisma/seed.ts"
+    "prisma:seed": "ts-node --transpile-only prisma/seed.ts",
+    "prisma:studio": "prisma studio"
   },
   "repository": {
     "type": "git",
@@ -100,6 +102,7 @@
     "@commons": "src/commons",
     "@logger": "./src/commons/infrastructure/logger/index",
     "@authz": "src/authz",
+    "@user": "src/user",
     "@task": "src/task",
     "@critic-activity": "src/critic-activity",
     "@multimedia": "src/multimedia",
