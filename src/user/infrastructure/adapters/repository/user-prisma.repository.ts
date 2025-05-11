@@ -21,6 +21,7 @@ export class UserStorageAdapter implements IUserStorageAdapter {
       customerId: user.customerId,
       idpId: user.idpId,
       role: user.role as Role,
+      rut: user.rut,
     })
   }
 
@@ -41,6 +42,7 @@ export class UserStorageAdapter implements IUserStorageAdapter {
       customerId: user.customerId,
       idpId: user.idpId,
       role: user.role as Role,
+      rut: user.rut,
     })
   }
 
@@ -55,6 +57,7 @@ export class UserStorageAdapter implements IUserStorageAdapter {
         customerId: user.customerId,
         idpId: user.idpId,
         role: user.role as Role,
+        rut: user.rut,
       }))
     } else {
       const users = await this.userStorage.users({})
@@ -66,6 +69,7 @@ export class UserStorageAdapter implements IUserStorageAdapter {
         customerId: user.customerId,
         idpId: user.idpId,
         role: user.role as Role,
+        rut: user.rut,
       }))
     }
   }
@@ -78,6 +82,7 @@ export class UserStorageAdapter implements IUserStorageAdapter {
       customer: { connect: { id: user.customerId } },
       idpId: user.idpId,
       role: user.role,
+      rut: user.rut,
     })
     return User.reconstitute({
       id: createdUser.id,
@@ -87,6 +92,7 @@ export class UserStorageAdapter implements IUserStorageAdapter {
       customerId: createdUser.customerId,
       idpId: createdUser.idpId,
       role: createdUser.role as Role,
+      rut: createdUser.rut,
     })
   }
 
@@ -99,6 +105,7 @@ export class UserStorageAdapter implements IUserStorageAdapter {
         customer: { connect: { id: user.customerId } },
         idpId: user.idpId,
         role: user.role,
+        rut: user.rut,
       }
     })
     return User.reconstitute({
@@ -109,6 +116,7 @@ export class UserStorageAdapter implements IUserStorageAdapter {
       customerId: updatedUser.customerId,
       idpId: updatedUser.idpId,
       role: updatedUser.role as Role,
+      rut: updatedUser.rut,
     })
   }
 
@@ -128,6 +136,7 @@ export class UserStorageAdapter implements IUserStorageAdapter {
       customerId: user.customerId,
       idpId: user.idpId,
       role: user.role as Role,
+      rut: user.rut,
     }))
   }
 }

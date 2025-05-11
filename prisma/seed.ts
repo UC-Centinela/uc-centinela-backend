@@ -3,7 +3,8 @@ import { PrismaClient, TaskState } from '@prisma/client'
 const prisma = new PrismaClient()
 
 async function main() {
-  // Crear cliente necesario para los usuarios
+
+
   const customer = await prisma.customer.upsert({
     where: { email: 'contacto@centinela.cl' },
     update: {},
@@ -16,18 +17,19 @@ async function main() {
 
   // Mock Users
   const users = [
-    { firstName: 'Alice', lastName: 'Smith', email: 'alice@example.com', role: 'ADMIN', customerId: customer.id },
-    { firstName: 'Bob', lastName: 'Johnson', email: 'bob@example.com', role: 'USER', customerId: customer.id },
-    { firstName: 'Charlie', lastName: 'Brown', email: 'charlie@example.com', role: 'REVISOR', customerId: customer.id },
+    { firstName: 'Alice', lastName: 'Smith', email: 'alice@example.com', role: 'ADMIN', rut: '12345678', customerId: customer.id },
+    { firstName: 'Bob', lastName: 'Johnson', email: 'bob@example.com', role: 'USER', rut: '12345678', customerId: customer.id },
+    { firstName: 'Charlie', lastName: 'Brown', email: 'charlie@example.com', role: 'REVISOR', rut: '12345678', customerId: customer.id },
   ];
 
   for (const user of users) {
     await prisma.user.create({
       data: user,
+
     });
   }
 
-  // Obtener IDs reales (no asumir que son 1, 2, 3)
+  
   const userAlice = await prisma.user.findUnique({ where: { email: 'alice@example.com' } });
   const userBob = await prisma.user.findUnique({ where: { email: 'bob@example.com' } });
   const userCharlie = await prisma.user.findUnique({ where: { email: 'charlie@example.com' } });
@@ -49,6 +51,7 @@ async function main() {
   for (const task of tasks) {
     await prisma.task.create({
       data: task,
+
     });
   }
 }
@@ -65,3 +68,4 @@ main()
   .finally(async () => {
     await prisma.$disconnect();
   });
+

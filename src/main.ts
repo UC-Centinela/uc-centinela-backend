@@ -30,9 +30,10 @@ async function bootstrap () {
     // CORS
     await app.register(fastifyCors as any, {
       origin: (origin, callback) => {
-        const allowedOrigins = (process.env.HOSTNAME_FOR_FRONTEND || 'localhost:3000').split(',')
-        
-        if (!origin || allowedOrigins.includes(origin.replace(/^https?:\/\//, ''))) {
+        const allowedOrigins: string[] = config.hostnameFrontend
+  
+        // Permite la solicitud si el origen está en la lista de orígenes permitidos
+        if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
           callback(null, true)
         } else {
           callback(new Error(`Origin: ${origin} No permitido por CORS`))

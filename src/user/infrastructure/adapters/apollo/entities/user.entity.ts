@@ -22,4 +22,7 @@ export class User {
 
   @Field(() => String, { description: 'user idp id' })
   idpId: string
+  
+  @Field(() => String, { nullable: true, description: 'user rut (Chilean ID)' })
+  rut?: string
 }

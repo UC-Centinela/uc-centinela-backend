@@ -16,13 +16,16 @@ interface UserProps {
   email: string;
   customerId: number;
   lastLogin?: Date;
+  rut?: string;
 }
 
 export enum Role {
   SUPERADMIN = 'roleSuperAdmin',
   ADMIN = 'roleAdmin',
   OPERATOR = 'roleOperator',
-  GUEST = 'roleGuest'
+  GUEST = 'roleGuest',
+  REVISOR = 'roleRevisor',
+  USER = 'roleUser',
 }
 
 export class User {
@@ -63,6 +66,10 @@ export class User {
 
   get lastLogin (): Date | undefined {
     return this.props.lastLogin
+  }
+
+  get rut (): string | undefined {
+    return this.props.rut
   }
 
   get role (): Role {
