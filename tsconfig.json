@@ -30,7 +30,7 @@
       "@control/*": ["control/*"],
       "@undesired-event/*": ["undesired-event/*"],
       "@verification-question/*": ["verification-question/*"],
-      
+      "@tool/*": ["tool/*"]
     }
   },
   "include": ["src/**/*.ts"],
