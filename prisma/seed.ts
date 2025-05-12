@@ -107,6 +107,16 @@ async function main() {
       }
     })
   }
+
+  // Tools
+  for (const [i, activity] of allCriticActivities.entries()) {
+    await prisma.tool.create({
+      data: {
+        criticActivityId: activity.id,
+        title: `Herramienta ${i + 1}`
+      }
+    })
+  }
 }
 
 main()
