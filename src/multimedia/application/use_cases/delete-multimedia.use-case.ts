@@ -3,9 +3,9 @@ import { IMultimediaStorageAdapter } from '@multimedia/domain/interfaces/multime
 
 @Injectable()
 export class DeleteMultimediaUseCase {
-  constructor(private readonly storage: IMultimediaStorageAdapter) {}
+  constructor (private readonly storage: IMultimediaStorageAdapter) {}
 
-  execute(id: number): Promise<boolean> {
+  execute (id: number): Promise<boolean> {
     return this.storage.delete(id)
   }
 }

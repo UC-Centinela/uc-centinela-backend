@@ -1,4 +1,4 @@
-import { CriticActivity } from '../critic-activity';
+import { CriticActivity } from '../critic-activity'
 
 export interface CreateCriticActivityDTO {
   title: string;

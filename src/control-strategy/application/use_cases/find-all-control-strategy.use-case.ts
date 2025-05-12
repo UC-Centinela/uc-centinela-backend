@@ -4,9 +4,9 @@ import { ControlStrategy } from '@control-strategy/domain/control-strategy'
 
 @Injectable()
 export class FindAllControlStrategyUseCase {
-  constructor(private readonly storage: IControlStrategyStorageAdapter) {}
+  constructor (private readonly storage: IControlStrategyStorageAdapter) {}
 
-  execute(): Promise<ControlStrategy[]> {
+  execute (): Promise<ControlStrategy[]> {
     return this.storage.findAll()
   }
 }

@@ -115,6 +115,12 @@ type VerificationQuestion {
   description: String
 }
 
+type Tool {
+  id: Int!
+  criticActivityId: Int!
+  title: String!
+}
+
 type Query {
   """Provision service: get all users in the system"""
   allUsers: [User!]!
@@ -147,6 +153,9 @@ type Query {
   findAllVerificationQuestions: [VerificationQuestion!]!
   findVerificationQuestion(id: Int!): VerificationQuestion!
   findVerificationQuestionsByCriticActivity(criticActivityId: Int!): [VerificationQuestion!]!
+  findAllTools: [Tool!]!
+  findTool(id: Int!): Tool!
+  findToolsByCriticActivity(criticActivityId: Int!): [Tool!]!
 }
 
 type Mutation {
@@ -195,6 +204,9 @@ type Mutation {
   createVerificationQuestion(input: CreateVerificationQuestionInput!): VerificationQuestion!
   updateVerificationQuestion(input: UpdateVerificationQuestionInput!): VerificationQuestion!
   deleteVerificationQuestion(id: Int!): Boolean!
+  createTool(input: CreateToolInput!): Tool!
+  updateTool(input: UpdateToolInput!): Tool!
+  deleteTool(id: Int!): Boolean!
 }
 
 input CreateUserInput {
@@ -371,6 +383,17 @@ input CreateVerificationQuestionInput {
 input UpdateVerificationQuestionInput {
   title: String
   description: String
+  criticActivityId: Int
+  id: Int!
+}
+
+input CreateToolInput {
+  title: String!
+  criticActivityId: Int!
+}
+
+input UpdateToolInput {
+  title: String
   criticActivityId: Int
   id: Int!
 }

@@ -18,29 +18,29 @@ export class MultimediaResolver {
 
   @Permissions('create:multimedia')
   @Mutation(() => Multimedia)
-  createMultimedia(@Args('input') input: CreateMultimediaInput) {
+  createMultimedia (@Args('input') input: CreateMultimediaInput) {
     this.logger.debug('[createMultimedia] Creating multimedia...')
     return this.multimediaService.create(input)
   }
 
   @Query(() => [Multimedia])
-  findAllMultimedia() {
+  findAllMultimedia () {
     this.logger.debug('[findAll] Fetching all multimedia...')
     return this.multimediaService.findAll()
   }
 
   @Query(() => Multimedia)
-  findMultimedia(@Args('id', { type: () => Int }) id: number) {
+  findMultimedia (@Args('id', { type: () => Int }) id: number) {
     return this.multimediaService.findOne(id)
   }
 
   @Mutation(() => Multimedia)
-  updateMultimedia(@Args('input') input: UpdateMultimediaInput) {
+  updateMultimedia (@Args('input') input: UpdateMultimediaInput) {
     return this.multimediaService.update({ id: input.id, updateMultimedia: input })
   }
 
   @Mutation(() => Boolean)
-  deleteMultimedia(@Args('id', { type: () => Int }) id: number) {
+  deleteMultimedia (@Args('id', { type: () => Int }) id: number) {
     return this.multimediaService.delete(id)
   }
 }

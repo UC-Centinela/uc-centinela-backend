@@ -4,9 +4,9 @@ import { UndesiredEvent } from '@undesired-event/domain/undesired-event'
 
 @Injectable()
 export class FindOneUndesiredEventUseCase {
-  constructor(private readonly storage: IUndesiredEventStorageAdapter) {}
+  constructor (private readonly storage: IUndesiredEventStorageAdapter) {}
 
-  execute(id: number): Promise<UndesiredEvent> {
+  execute (id: number): Promise<UndesiredEvent> {
     return this.storage.findOne(id)
   }
 }

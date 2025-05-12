@@ -5,9 +5,9 @@ import { VerificationQuestion } from '@verification-question/domain/verification
 
 @Injectable()
 export class CreateVerificationQuestionUseCase {
-  constructor(private readonly storage: IVerificationQuestionStorageAdapter) {}
+  constructor (private readonly storage: IVerificationQuestionStorageAdapter) {}
 
-  execute(dto: CreateVerificationQuestionDTO): Promise<VerificationQuestion> {
+  execute (dto: CreateVerificationQuestionDTO): Promise<VerificationQuestion> {
     const entity = VerificationQuestion.create(dto)
     return this.storage.create(entity)
   }

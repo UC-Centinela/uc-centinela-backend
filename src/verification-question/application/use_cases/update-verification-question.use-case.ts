@@ -5,9 +5,9 @@ import { VerificationQuestion } from '@verification-question/domain/verification
 
 @Injectable()
 export class UpdateVerificationQuestionUseCase {
-  constructor(private readonly storage: IVerificationQuestionStorageAdapter) {}
+  constructor (private readonly storage: IVerificationQuestionStorageAdapter) {}
 
-  execute(dto: UpdateVerificationQuestionDTO): Promise<VerificationQuestion> {
+  execute (dto: UpdateVerificationQuestionDTO): Promise<VerificationQuestion> {
     const entity = VerificationQuestion.reconstitute({ id: dto.id, ...dto.updateVerificationQuestion } as any)
     return this.storage.update(entity)
   }

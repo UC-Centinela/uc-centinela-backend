@@ -5,9 +5,9 @@ import { Control } from '@control/domain/control'
 
 @Injectable()
 export class UpdateControlUseCase {
-  constructor(private readonly storage: IControlStorageAdapter) {}
+  constructor (private readonly storage: IControlStorageAdapter) {}
 
-  execute(dto: UpdateControlDTO): Promise<Control> {
+  execute (dto: UpdateControlDTO): Promise<Control> {
     const updated = Control.reconstitute({ id: dto.id, ...dto.updateControl } as any)
     return this.storage.update(updated)
   }

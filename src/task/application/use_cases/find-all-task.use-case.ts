@@ -4,9 +4,9 @@ import { Task } from '@task/domain/task'
 
 @Injectable()
 export class FindAllTaskUseCase {
-  constructor(private readonly storage: ITaskStorageAdapter) {}
+  constructor (private readonly storage: ITaskStorageAdapter) {}
 
-  execute(): Promise<Task[]> {
+  execute (): Promise<Task[]> {
     return this.storage.findAll()
   }
 }

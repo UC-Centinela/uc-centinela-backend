@@ -4,9 +4,9 @@ import { Multimedia } from '@multimedia/domain/multimedia'
 
 @Injectable()
 export class FindOneMultimediaUseCase {
-  constructor(private readonly storage: IMultimediaStorageAdapter) {}
+  constructor (private readonly storage: IMultimediaStorageAdapter) {}
 
-  execute(id: number): Promise<Multimedia> {
+  execute (id: number): Promise<Multimedia> {
     return this.storage.findOne(id)
   }
 }

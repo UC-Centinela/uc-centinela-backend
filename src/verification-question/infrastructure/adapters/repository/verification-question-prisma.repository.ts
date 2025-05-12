@@ -6,9 +6,9 @@ import { mapPrismaVerificationQuestionToDomain } from './verification-question.u
 
 @Injectable()
 export class VerificationQuestionStorageAdapter implements IVerificationQuestionStorageAdapter {
-  constructor(private readonly storage: VerificationQuestionStorage) {}
+  constructor (private readonly storage: VerificationQuestionStorage) {}
 
-  async create(entity: VerificationQuestion): Promise<VerificationQuestion> {
+  async create (entity: VerificationQuestion): Promise<VerificationQuestion> {
     const result = await this.storage.createVerificationQuestion({
       criticActivity: { connect: { id: entity.criticActivityId } },
       title: entity.title,
@@ -18,17 +18,17 @@ export class VerificationQuestionStorageAdapter implements IVerificationQuestion
     return mapPrismaVerificationQuestionToDomain(result)
   }
 
-  async findAll(): Promise<VerificationQuestion[]> {
+  async findAll (): Promise<VerificationQuestion[]> {
     const result = await this.storage.verificationQuestions()
     return result.map(mapPrismaVerificationQuestionToDomain)
   }
 
-  async findOne(id: number): Promise<VerificationQuestion> {
+  async findOne (id: number): Promise<VerificationQuestion> {
     const result = await this.storage.verificationQuestion(id)
     return mapPrismaVerificationQuestionToDomain(result)
   }
 
-  async update(entity: VerificationQuestion): Promise<VerificationQuestion> {
+  async update (entity: VerificationQuestion): Promise<VerificationQuestion> {
     const result = await this.storage.updateVerificationQuestion(entity.id, {
       title: entity.title,
       description: entity.description
@@ -37,12 +37,12 @@ export class VerificationQuestionStorageAdapter implements IVerificationQuestion
     return mapPrismaVerificationQuestionToDomain(result)
   }
 
-  async delete(id: number): Promise<boolean> {
+  async delete (id: number): Promise<boolean> {
     await this.storage.deleteVerificationQuestion(id)
     return true
   }
 
-  async findAllByCriticActivityId(criticActivityId: number): Promise<VerificationQuestion[]> {
+  async findAllByCriticActivityId (criticActivityId: number): Promise<VerificationQuestion[]> {
     const result = await this.storage.findAllByCriticActivityId(criticActivityId)
     return result.map(mapPrismaVerificationQuestionToDomain)
   }

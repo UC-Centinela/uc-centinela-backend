@@ -4,25 +4,25 @@ import { Prisma, ControlStrategy as PrismaControlStrategy } from '@prisma/client
 
 @Injectable()
 export class ControlStrategyStorage {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor (private readonly prisma: PrismaService) {}
 
-  async createControlStrategy(data: Prisma.ControlStrategyCreateInput): Promise<PrismaControlStrategy> {
+  async createControlStrategy (data: Prisma.ControlStrategyCreateInput): Promise<PrismaControlStrategy> {
     return this.prisma.controlStrategy.create({ data })
   }
 
-  async controlStrategies(): Promise<PrismaControlStrategy[]> {
+  async controlStrategies (): Promise<PrismaControlStrategy[]> {
     return this.prisma.controlStrategy.findMany()
   }
 
-  async controlStrategy(id: number): Promise<PrismaControlStrategy> {
+  async controlStrategy (id: number): Promise<PrismaControlStrategy> {
     return this.prisma.controlStrategy.findUnique({ where: { id } })
   }
 
-  async updateControlStrategy(id: number, data: Prisma.ControlStrategyUpdateInput): Promise<PrismaControlStrategy> {
+  async updateControlStrategy (id: number, data: Prisma.ControlStrategyUpdateInput): Promise<PrismaControlStrategy> {
     return this.prisma.controlStrategy.update({ where: { id }, data })
   }
 
-  async deleteControlStrategy(id: number): Promise<PrismaControlStrategy> {
+  async deleteControlStrategy (id: number): Promise<PrismaControlStrategy> {
     return this.prisma.controlStrategy.delete({ where: { id } })
   }
 }

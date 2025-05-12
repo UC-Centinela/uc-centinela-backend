@@ -23,35 +23,46 @@ export enum TaskState {
 }
 
 export class Task {
-  private readonly props: TaskProps;
+  private readonly props: TaskProps
 
-  private constructor(props: TaskProps) {
-    this.props = Object.freeze({ ...props });
+  private constructor (props: TaskProps) {
+    this.props = Object.freeze({ ...props })
   }
 
-  get id() { return this.props.id; }
-  get title() { return this.props.title; }
-  get instruction() { return this.props.instruction; }
-  get comments() { return this.props.comments; }
-  get state() { return this.props.state; }
-  get assignationDate() { return this.props.assignationDate; }
-  get requiredSendDate() { return this.props.requiredSendDate; }
-  get creatorUserId() { return this.props.creatorUserId; }
-  get revisorUserId() { return this.props.revisorUserId; }
-  get createdAt() { return this.props.createdAt; }
-  get updatedAt() { return this.props.updatedAt; }
-  get changeHistory() { return this.props.changeHistory; }
+  get id () { return this.props.id }
 
-  static create(props: Omit<TaskProps, 'id' | 'createdAt' | 'updatedAt'>): Task {
-    return new Task({ ...props });
+  get title () { return this.props.title }
+
+  get instruction () { return this.props.instruction }
+
+  get comments () { return this.props.comments }
+
+  get state () { return this.props.state }
+
+  get assignationDate () { return this.props.assignationDate }
+
+  get requiredSendDate () { return this.props.requiredSendDate }
+
+  get creatorUserId () { return this.props.creatorUserId }
+
+  get revisorUserId () { return this.props.revisorUserId }
+
+  get createdAt () { return this.props.createdAt }
+
+  get updatedAt () { return this.props.updatedAt }
+
+  get changeHistory () { return this.props.changeHistory }
+
+  static create (props: Omit<TaskProps, 'id' | 'createdAt' | 'updatedAt'>): Task {
+    return new Task({ ...props })
   }
 
-  update(props: Partial<TaskProps>): Task {
-    return new Task({ ...this.props, ...props });
+  update (props: Partial<TaskProps>): Task {
+    return new Task({ ...this.props, ...props })
   }
 
-  static reconstitute(props: TaskProps): Task {
-    return new Task(props);
+  static reconstitute (props: TaskProps): Task {
+    return new Task(props)
   }
 }
 

@@ -5,9 +5,9 @@ import { Control } from '@control/domain/control'
 
 @Injectable()
 export class CreateControlUseCase {
-  constructor(private readonly storage: IControlStorageAdapter) {}
+  constructor (private readonly storage: IControlStorageAdapter) {}
 
-  execute(dto: CreateControlDTO): Promise<Control> {
+  execute (dto: CreateControlDTO): Promise<Control> {
     const control = Control.create(dto)
     return this.storage.create(control)
   }

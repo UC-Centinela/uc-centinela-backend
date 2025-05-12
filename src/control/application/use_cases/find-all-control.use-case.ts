@@ -4,9 +4,9 @@ import { Control } from '@control/domain/control'
 
 @Injectable()
 export class FindAllControlUseCase {
-  constructor(private readonly storage: IControlStorageAdapter) {}
+  constructor (private readonly storage: IControlStorageAdapter) {}
 
-  execute(): Promise<Control[]> {
+  execute (): Promise<Control[]> {
     return this.storage.findAll()
   }
 }

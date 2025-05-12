@@ -3,9 +3,9 @@ import { IControlStorageAdapter } from '@control/domain/interfaces/control.repos
 
 @Injectable()
 export class DeleteControlUseCase {
-  constructor(private readonly storage: IControlStorageAdapter) {}
+  constructor (private readonly storage: IControlStorageAdapter) {}
 
-  execute(id: number): Promise<boolean> {
+  execute (id: number): Promise<boolean> {
     return this.storage.delete(id)
   }
 }

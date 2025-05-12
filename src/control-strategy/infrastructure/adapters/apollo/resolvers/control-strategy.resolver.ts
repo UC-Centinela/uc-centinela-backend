@@ -18,29 +18,29 @@ export class ControlStrategyResolver {
 
   @Permissions('create:control-strategy')
   @Mutation(() => ControlStrategy)
-  createControlStrategy(@Args('input') input: CreateControlStrategyInput) {
+  createControlStrategy (@Args('input') input: CreateControlStrategyInput) {
     this.logger.debug('[createControlStrategy] Creating...')
     return this.service.create(input)
   }
 
   @Query(() => [ControlStrategy])
-  findAllControlStrategies() {
+  findAllControlStrategies () {
     this.logger.debug('[findAll] Fetching all...')
     return this.service.findAll()
   }
 
   @Query(() => ControlStrategy)
-  findControlStrategy(@Args('id', { type: () => Int }) id: number) {
+  findControlStrategy (@Args('id', { type: () => Int }) id: number) {
     return this.service.findOne(id)
   }
 
   @Mutation(() => ControlStrategy)
-  updateControlStrategy(@Args('input') input: UpdateControlStrategyInput) {
+  updateControlStrategy (@Args('input') input: UpdateControlStrategyInput) {
     return this.service.update({ id: input.id, updateControlStrategy: input })
   }
 
   @Mutation(() => Boolean)
-  deleteControlStrategy(@Args('id', { type: () => Int }) id: number) {
+  deleteControlStrategy (@Args('id', { type: () => Int }) id: number) {
     return this.service.delete(id)
   }
 }

@@ -17,23 +17,23 @@ export class ControlService implements IControlService {
     private readonly deleteUseCase: DeleteControlUseCase
   ) {}
 
-  create(dto: CreateControlDTO): Promise<Control> {
+  create (dto: CreateControlDTO): Promise<Control> {
     return this.createUseCase.execute(dto)
   }
 
-  findAll(): Promise<Control[]> {
+  findAll (): Promise<Control[]> {
     return this.findAllUseCase.execute()
   }
 
-  findOne(id: number): Promise<Control> {
+  findOne (id: number): Promise<Control> {
     return this.findOneUseCase.execute(id)
   }
 
-  update(dto: UpdateControlDTO): Promise<Control> {
+  update (dto: UpdateControlDTO): Promise<Control> {
     return this.updateUseCase.execute(dto)
   }
 
-  delete(id: number): Promise<boolean> {
+  delete (id: number): Promise<boolean> {
     return this.deleteUseCase.execute(id)
   }
 }

@@ -1,4 +1,4 @@
-import { Task, TaskState } from '../task';
+import { Task, TaskState } from '../task'
 
 export interface CreateTaskDTO {
   title: string;

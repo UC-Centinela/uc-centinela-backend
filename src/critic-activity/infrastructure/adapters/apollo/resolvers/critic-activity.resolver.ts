@@ -8,7 +8,7 @@ import { ILogger } from '@commons/domain/interfaces/logger.interface'
 
 @Resolver(() => CriticActivity)
 export class CriticActivityResolver {
-  constructor(
+  constructor (
     @Inject('ICriticActivityService') private readonly service: ICriticActivityService,
     @Inject('LOGGER') private readonly logger: ILogger
   ) {
@@ -16,32 +16,32 @@ export class CriticActivityResolver {
   }
 
   @Query(() => [CriticActivity], { name: 'findAllCriticActivities' })
-  findAll() {
+  findAll () {
     return this.service.findAll()
   }
 
   @Query(() => CriticActivity, { name: 'findCriticActivity' })
-  findOne(@Args('id') id: number) {
+  findOne (@Args('id') id: number) {
     return this.service.findOne(id)
   }
 
   @Mutation(() => CriticActivity, { name: 'createCriticActivity' })
-  create(@Args('input') input: CreateCriticActivityInput) {
+  create (@Args('input') input: CreateCriticActivityInput) {
     return this.service.create(input)
   }
 
   @Mutation(() => CriticActivity, { name: 'updateCriticActivity' })
-  update(@Args('input') input: UpdateCriticActivityInput) {
+  update (@Args('input') input: UpdateCriticActivityInput) {
     return this.service.update({ id: input.id, updateCriticActivity: input })
   }
 
   @Mutation(() => Boolean, { name: 'deleteCriticActivity' })
-  delete(@Args('id') id: number) {
+  delete (@Args('id') id: number) {
     return this.service.delete(id)
   }
 
   @Query(() => [CriticActivity], { name: 'findAllCriticActivitiesByTask' })
-  findAllByTaskId(@Args('taskId') taskId: number) {
+  findAllByTaskId (@Args('taskId') taskId: number) {
     return this.service.findAllByTaskId(taskId)
   }
 

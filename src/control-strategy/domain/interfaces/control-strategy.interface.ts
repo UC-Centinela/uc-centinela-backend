@@ -1,4 +1,4 @@
-import { ControlStrategy } from '../control-strategy';
+import { ControlStrategy } from '../control-strategy'
 
 export interface CreateControlStrategyDTO {
   taskId: number;

@@ -5,9 +5,9 @@ import { UndesiredEvent } from '@undesired-event/domain/undesired-event'
 
 @Injectable()
 export class UpdateUndesiredEventUseCase {
-  constructor(private readonly storage: IUndesiredEventStorageAdapter) {}
+  constructor (private readonly storage: IUndesiredEventStorageAdapter) {}
 
-  execute(dto: UpdateUndesiredEventDTO): Promise<UndesiredEvent> {
+  execute (dto: UpdateUndesiredEventDTO): Promise<UndesiredEvent> {
     const entity = UndesiredEvent.reconstitute({ id: dto.id, ...dto.updateUndesiredEvent } as any)
     return this.storage.update(entity)
   }

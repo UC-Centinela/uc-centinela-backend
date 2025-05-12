@@ -4,25 +4,25 @@ import { Prisma, Task } from '@prisma/client'
 
 @Injectable()
 export class TaskStorage {
-  constructor(private prisma: PrismaService) {}
+  constructor (private prisma: PrismaService) {}
 
-  async createTask(data: Prisma.TaskCreateInput): Promise<Task> {
+  async createTask (data: Prisma.TaskCreateInput): Promise<Task> {
     return this.prisma.task.create({ data })
   }
 
-  async tasks(): Promise<Task[]> {
+  async tasks (): Promise<Task[]> {
     return this.prisma.task.findMany()
   }
 
-  async task(id: number): Promise<Task> {
+  async task (id: number): Promise<Task> {
     return this.prisma.task.findUnique({ where: { id } })
   }
 
-  async updateTask(id: number, data: Prisma.TaskUpdateInput): Promise<Task> {
+  async updateTask (id: number, data: Prisma.TaskUpdateInput): Promise<Task> {
     return this.prisma.task.update({ where: { id }, data })
   }
 
-  async deleteTask(id: number): Promise<Task> {
+  async deleteTask (id: number): Promise<Task> {
     return this.prisma.task.delete({ where: { id } })
   }
 }

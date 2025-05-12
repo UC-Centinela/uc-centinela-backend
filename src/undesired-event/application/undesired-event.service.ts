@@ -19,27 +19,27 @@ export class UndesiredEventService implements IUndesiredEventService {
     private readonly findByCriticActivityUseCase: FindByCriticActivityIdUndesiredEventUseCase
   ) {}
 
-  create(dto: CreateUndesiredEventDTO): Promise<UndesiredEvent> {
+  create (dto: CreateUndesiredEventDTO): Promise<UndesiredEvent> {
     return this.createUseCase.execute(dto)
   }
 
-  findAll(): Promise<UndesiredEvent[]> {
+  findAll (): Promise<UndesiredEvent[]> {
     return this.findAllUseCase.execute()
   }
 
-  findOne(id: number): Promise<UndesiredEvent> {
+  findOne (id: number): Promise<UndesiredEvent> {
     return this.findOneUseCase.execute(id)
   }
 
-  update(dto: UpdateUndesiredEventDTO): Promise<UndesiredEvent> {
+  update (dto: UpdateUndesiredEventDTO): Promise<UndesiredEvent> {
     return this.updateUseCase.execute(dto)
   }
 
-  delete(id: number): Promise<boolean> {
+  delete (id: number): Promise<boolean> {
     return this.deleteUseCase.execute(id)
   }
 
-  findAllByCriticActivityId(criticActivityId: number): Promise<UndesiredEvent[]> {
+  findAllByCriticActivityId (criticActivityId: number): Promise<UndesiredEvent[]> {
     return this.findByCriticActivityUseCase.execute(criticActivityId)
   }
 }

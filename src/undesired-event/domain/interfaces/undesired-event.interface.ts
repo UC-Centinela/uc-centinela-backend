@@ -1,4 +1,4 @@
-import { UndesiredEvent } from '../undesired-event';
+import { UndesiredEvent } from '../undesired-event'
 
 export interface CreateUndesiredEventDTO {
   criticActivityId: number;

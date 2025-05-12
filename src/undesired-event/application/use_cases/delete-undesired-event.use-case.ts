@@ -3,9 +3,9 @@ import { IUndesiredEventStorageAdapter } from '@undesired-event/domain/interface
 
 @Injectable()
 export class DeleteUndesiredEventUseCase {
-  constructor(private readonly storage: IUndesiredEventStorageAdapter) {}
+  constructor (private readonly storage: IUndesiredEventStorageAdapter) {}
 
-  execute(id: number): Promise<boolean> {
+  execute (id: number): Promise<boolean> {
     return this.storage.delete(id)
   }
 }

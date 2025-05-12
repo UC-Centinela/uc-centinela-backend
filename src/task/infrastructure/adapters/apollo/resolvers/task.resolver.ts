@@ -18,29 +18,29 @@ export class TaskResolver {
 
   @Permissions('create:task')
   @Mutation(() => Task)
-  createTask(@Args('input') input: CreateTaskInput) {
+  createTask (@Args('input') input: CreateTaskInput) {
     this.logger.debug('[createTask] Creating task...')
     return this.taskService.create(input)
   }
 
   @Query(() => [Task])
-  findAllTasks() {
+  findAllTasks () {
     this.logger.debug('[findAll] Fetching all tasks...')
     return this.taskService.findAll()
   }
 
   @Query(() => Task)
-  findTask(@Args('id', { type: () => Int }) id: number) {
+  findTask (@Args('id', { type: () => Int }) id: number) {
     return this.taskService.findOne(id)
   }
 
   @Mutation(() => Task)
-  updateTask(@Args('input') input: UpdateTaskInput) {
+  updateTask (@Args('input') input: UpdateTaskInput) {
     return this.taskService.update({ id: input.id, updateTask: input })
   }
 
   @Mutation(() => Boolean)
-  deleteTask(@Args('id', { type: () => Int }) id: number) {
+  deleteTask (@Args('id', { type: () => Int }) id: number) {
     return this.taskService.delete(id)
   }
 }

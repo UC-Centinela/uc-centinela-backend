@@ -3,9 +3,9 @@ import { IVerificationQuestionStorageAdapter } from '@verification-question/doma
 
 @Injectable()
 export class DeleteVerificationQuestionUseCase {
-  constructor(private readonly storage: IVerificationQuestionStorageAdapter) {}
+  constructor (private readonly storage: IVerificationQuestionStorageAdapter) {}
 
-  execute(id: number): Promise<boolean> {
+  execute (id: number): Promise<boolean> {
     return this.storage.delete(id)
   }
 }

@@ -4,29 +4,29 @@ import { Prisma, UndesiredEvent as PrismaUndesiredEvent } from '@prisma/client'
 
 @Injectable()
 export class UndesiredEventStorage {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor (private readonly prisma: PrismaService) {}
 
-  async createUndesiredEvent(data: Prisma.UndesiredEventCreateInput): Promise<PrismaUndesiredEvent> {
+  async createUndesiredEvent (data: Prisma.UndesiredEventCreateInput): Promise<PrismaUndesiredEvent> {
     return this.prisma.undesiredEvent.create({ data })
   }
 
-  async undesiredEvents(): Promise<PrismaUndesiredEvent[]> {
+  async undesiredEvents (): Promise<PrismaUndesiredEvent[]> {
     return this.prisma.undesiredEvent.findMany()
   }
 
-  async undesiredEvent(id: number): Promise<PrismaUndesiredEvent> {
+  async undesiredEvent (id: number): Promise<PrismaUndesiredEvent> {
     return this.prisma.undesiredEvent.findUnique({ where: { id } })
   }
 
-  async updateUndesiredEvent(id: number, data: Prisma.UndesiredEventUpdateInput): Promise<PrismaUndesiredEvent> {
+  async updateUndesiredEvent (id: number, data: Prisma.UndesiredEventUpdateInput): Promise<PrismaUndesiredEvent> {
     return this.prisma.undesiredEvent.update({ where: { id }, data })
   }
 
-  async deleteUndesiredEvent(id: number): Promise<PrismaUndesiredEvent> {
+  async deleteUndesiredEvent (id: number): Promise<PrismaUndesiredEvent> {
     return this.prisma.undesiredEvent.delete({ where: { id } })
   }
 
-  async findAllByCriticActivityId(criticActivityId: number): Promise<PrismaUndesiredEvent[]> {
+  async findAllByCriticActivityId (criticActivityId: number): Promise<PrismaUndesiredEvent[]> {
     return this.prisma.undesiredEvent.findMany({ where: { criticActivityId } })
   }
 }
