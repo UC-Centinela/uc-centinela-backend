@@ -18,5 +18,14 @@ export type Config = {
     roleAdmin: string,
     roleOperator: string,
     roleGuest: string
+  },
+  ibm: {
+    endpoint: string,
+    apiKey: string,
+    serviceInstanceId: string,
+    bucketName: string
+  },
+  openai: {
+    apiKey: string
   }
 }

@@ -22,5 +22,14 @@ export const config: Config = {
     roleAdmin: process.env.AUTH0_ROLE_ADMIN || '',
     roleOperator: process.env.AUTH0_ROLE_OPERATOR || '',
     roleGuest: process.env.AUTH0_ROLE_GUEST || ''
+  },
+  ibm: {
+    endpoint: process.env.IBM_COS_ENDPOINT || '',
+    apiKey: process.env.IBM_COS_API_KEY || '',
+    serviceInstanceId: process.env.IBM_COS_SERVICE_INSTANCE_ID || '',
+    bucketName: process.env.IBM_COS_BUCKET_NAME || ''
+  },
+  openai: {
+    apiKey: process.env.OPENAI_API_KEY || ''
   }
 }

@@ -25,6 +25,7 @@ import { ControlModule } from '@control/infrastructure/control.module'
 import { UndesiredEventModule } from '@undesired-event/infrastructure/undesired-event.module'
 import { VerificationQuestionModule } from '@verification-question/infrastructure/verification-question.module'
 import { ToolModule } from '@tool/infrastructure/tool.module'
+import { graphqlUploadExpress } from 'graphql-upload'
 
 // Control the guard access depending on the environment
 const authGuard = {
@@ -62,6 +63,12 @@ if (config.nodeEnv !== 'local') {
       installSubscriptionHandlers: true,
       playground: false,
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
+      context: ({ req, res }) => ({ req, res }),
+      cors: {
+        origin: config.hostnameFrontend,
+        credentials: true,
+      },
+      uploads: false, // Disable built-in upload handling
     }),
     UserModule,
     CustomerModule,
@@ -78,4 +85,14 @@ if (config.nodeEnv !== 'local') {
   controllers: [],
   providers: [...providerConfig],
 })
-export class AppModule {}
+export class AppModule {
+  configure(consumer) {
+    // Configure middleware for file uploads
+    consumer
+      .apply(graphqlUploadExpress({
+        maxFileSize: 20 * 1024 * 1024, // 20 MB
+        maxFiles: 1
+      }))
+      .forRoutes('graphql');
+  }
+}
