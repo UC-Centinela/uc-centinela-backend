@@ -55,7 +55,7 @@ export class TaskStorageAdapter implements ITaskStorageAdapter {
     return true
   }
 
-  async findAllByUserId(userId: number): Promise<Task[]> {
+  async findAllByUserId (userId: number): Promise<Task[]> {
     const result = await this.storage.findAllByUserId(userId)
     return result.map(mapPrismaTaskToDomain)
   }

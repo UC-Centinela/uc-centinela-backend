@@ -39,7 +39,7 @@ export class TaskService implements ITaskService {
     return this.deleteTask.execute(id)
   }
 
-  findAllByUserId(userId: number): Promise<Task[]> {
+  findAllByUserId (userId: number): Promise<Task[]> {
     return this.findByUserIdTask.execute(userId)
-}
+  }
 }

@@ -6,5 +6,5 @@ export abstract class ITaskStorageAdapter {
   abstract findOne (id: number): Promise<Task>
   abstract update (task: Task): Promise<Task>
   abstract delete (id: number): Promise<boolean>
-  abstract findAllByUserId(userId: number): Promise<Task[]>
+  abstract findAllByUserId (userId: number): Promise<Task[]>
 }
