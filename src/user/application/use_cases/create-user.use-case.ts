@@ -37,18 +37,6 @@ export class CreateUserUseCase {
       return updatedUser
     }
 
-    // Caso 3: Usuario nuevo
-    if (process.env.NODE_ENV === 'local') {
-      const newUser = User.create({
-        email: createUserDTO.email,
-        firstName: createUserDTO.firstName,
-        lastName: createUserDTO.lastName,
-        customerId: createUserDTO.customerId,
-        role: createUserDTO.role
-      })
-      return await this.userRepository.create(newUser)
-    }
-
     // Producción: crear en identity provider y luego en base
     const idpUser = await this.enroleUserInIdentityProvider(createUserDTO)
     return await this.createUserInDatabase(createUserDTO, idpUser.user_id)
