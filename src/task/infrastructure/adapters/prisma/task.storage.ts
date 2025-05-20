@@ -25,4 +25,9 @@ export class TaskStorage {
   async deleteTask (id: number): Promise<Task> {
     return this.prisma.task.delete({ where: { id } })
   }
+
+  async findAllByUserId (userId: number): Promise<Task[]> {
+    return this.prisma.task.findMany({ where: { creatorUserId: userId } })
+  }
+
 }
