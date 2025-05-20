@@ -4,6 +4,7 @@ import { DeleteTaskUseCase } from './use_cases/delete-task.use-case'
 import { FindAllTaskUseCase } from './use_cases/find-all-task.use-case'
 import { FindOneTaskUseCase } from './use_cases/find-one-task.use-case'
 import { UpdateTaskUseCase } from './use_cases/update-task.use-case'
+import { FindByUserIdTaskUseCase } from './use_cases/find-by-user-id-task.use-case'
 import { ITaskService, CreateTaskDTO, UpdateTaskDTO } from '@task/domain/interfaces/task.interface'
 import { Task } from '@task/domain/task'
 
@@ -14,7 +15,8 @@ export class TaskService implements ITaskService {
     private readonly updateTask: UpdateTaskUseCase,
     private readonly findAllTask: FindAllTaskUseCase,
     private readonly findOneTask: FindOneTaskUseCase,
-    private readonly deleteTask: DeleteTaskUseCase
+    private readonly deleteTask: DeleteTaskUseCase,
+    private readonly findByUserIdTask: FindByUserIdTaskUseCase
   ) {}
 
   create (dto: CreateTaskDTO): Promise<Task> {
@@ -36,4 +38,8 @@ export class TaskService implements ITaskService {
   delete (id: number): Promise<boolean> {
     return this.deleteTask.execute(id)
   }
+
+  findAllByUserId(userId: number): Promise<Task[]> {
+    return this.findByUserIdTask.execute(userId)
+}
 }

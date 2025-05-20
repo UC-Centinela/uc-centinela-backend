@@ -138,6 +138,7 @@ type Query {
   getCustomerByEmail(email: String!): Customer!
   findAllTasks: [Task!]!
   findTask(id: Int!): Task!
+  findTasksByUser(userId: Int!): [Task!]!
   findAllCriticActivities: [CriticActivity!]!
   findCriticActivity(id: Float!): CriticActivity!
   findAllCriticActivitiesByTask(taskId: Float!): [CriticActivity!]!

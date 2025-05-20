@@ -43,4 +43,10 @@ export class TaskResolver {
   deleteTask (@Args('id', { type: () => Int }) id: number) {
     return this.taskService.delete(id)
   }
+
+  @Query(() => [Task])
+  findTasksByUser(@Args('userId', { type: () => Int }) userId: number) {
+    return this.taskService.findAllByUserId(userId)
+  }
+
 }
