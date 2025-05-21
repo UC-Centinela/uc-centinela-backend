@@ -8,7 +8,6 @@ import { ILogger } from '@commons/domain/interfaces/logger.interface'
 import { Permissions } from '@authz/permissions.decorator'
 import { UploadVideoInput } from '../dto/upload-video.input'
 import { UploadMediaUseCase } from '@multimedia/application/use_cases/upload-media.use-case'
-import { FileUpload } from 'graphql-upload'
 
 @Resolver(() => Multimedia)
 export class MultimediaResolver {
@@ -52,26 +51,14 @@ export class MultimediaResolver {
   @Mutation(() => Multimedia)
   async uploadVideo (@Args('input') input: UploadVideoInput) {
     this.logger.debug('[uploadVideo] Uploading video for task: ' + input.taskId)
-    
-    // Process file upload
-    const { createReadStream, filename, mimetype } = await input.file
-    
-    // Convert stream to buffer
-    const chunks = []
-    const readStream = createReadStream()
-    
-    for await (const chunk of readStream) {
-      chunks.push(chunk)
-    }
-    
-    const buffer = Buffer.concat(chunks)
-    
-    // Call the upload media use case
+
+    const buffer = Buffer.from(input.base64, 'base64')
+
     return this.uploadMediaUseCase.execute({
       taskId: input.taskId,
       videoBuffer: buffer,
-      filename,
-      mimetype
+      filename: input.filename,
+      mimetype: input.mimetype
     })
   }
 }

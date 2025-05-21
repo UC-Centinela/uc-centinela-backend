@@ -8,10 +8,10 @@ import { ITranscriptionService } from '@multimedia/domain/interfaces/transcripti
 import { CreateMultimediaDTO } from '@multimedia/domain/interfaces/multimedia.interface'
 
 export interface UploadVideoDTO {
-  taskId: number;
-  videoBuffer: Buffer;
-  filename: string;
-  mimetype: string;
+  taskId: number
+  videoBuffer: Buffer
+  filename: string
+  mimetype: string
 }
 
 @Injectable()
@@ -27,52 +27,38 @@ export class UploadMediaUseCase {
   }
 
   async execute(dto: UploadVideoDTO): Promise<Multimedia> {
+    this.logger.debug(`[execute] Inicio mutación con archivo: ${dto.filename}`)
+
     try {
-      // 1. Upload video to storage service
-      this.logger.debug(`[execute] Uploading video to storage: ${dto.filename}`)
-      const videoUrl = await this.storageService.uploadFile(
-        dto.videoBuffer,
-        dto.filename,
-        dto.mimetype
-      )
-
-      // 2. Create initial multimedia record with video URL
-      const multimediaDto: CreateMultimediaDTO = {
+      const videoUrl = await this.storageService.uploadFile(dto.videoBuffer, dto.filename, dto.mimetype)
+      const multimedia = Multimedia.create({
         taskId: dto.taskId,
-        videoUrl: videoUrl
-      }
-      
-      const multimedia = Multimedia.create(multimediaDto)
-      const savedMultimedia = await this.multimediaRepository.create(multimedia)
-      this.logger.debug(`[execute] Multimedia record created with ID: ${savedMultimedia.id}`)
+        videoUrl
+      })
 
-      // 3. Process audio extraction and transcription asynchronously
-      this.processAudioAndTranscription(dto.videoBuffer, savedMultimedia)
-
-      return savedMultimedia
+      const saved = await this.multimediaRepository.create(multimedia)
+      this.processAudioAndTranscription(dto.videoBuffer, saved)
+      return saved
     } catch (error) {
-      this.logger.error(`[execute] Error uploading media: ${error}`)
-      throw new Error(`Failed to upload media: ${error.message}`)
+      this.logger.error(`[execute] Error al subir video: ${error.message}`)
+      throw new Error(`Error al subir video: ${error.message}`)
     }
   }
 
   private async processAudioAndTranscription(videoBuffer: Buffer, multimedia: Multimedia): Promise<void> {
     try {
-      // Extract audio from video
-      this.logger.debug(`[processAudioAndTranscription] Extracting audio for multimedia ID: ${multimedia.id}`)
-      const audioBuffer = await this.audioExtractorService.extractAudio(videoBuffer, 'mp3')
-      
-      // Transcribe audio using OpenAI
-      this.logger.debug(`[processAudioAndTranscription] Transcribing audio for multimedia ID: ${multimedia.id}`)
-      const transcription = await this.transcriptionService.transcribe(audioBuffer)
-      
-      // Update multimedia record with transcription
-      const updatedMultimedia = multimedia.update({ audioTranscription: transcription })
-      await this.multimediaRepository.update(updatedMultimedia)
-      
-      this.logger.debug(`[processAudioAndTranscription] Transcription completed for multimedia ID: ${multimedia.id}`)
+      const audioBuffers = await this.audioExtractorService.extractAudio(videoBuffer, 'mp3')
+      let transcription = ''
+
+      for (const buffer of audioBuffers) {
+        const text = await this.transcriptionService.transcribe(buffer)
+        transcription += text.trim() + ' '
+      }
+
+      const updated = multimedia.update({ audioTranscription: transcription.trim() })
+      await this.multimediaRepository.update(updated)
     } catch (error) {
-      this.logger.error(`[processAudioAndTranscription] Error processing audio and transcription: ${error}`)
+      this.logger.error(`[processAudioAndTranscription] Error: ${error.message}`)
     }
   }
 }

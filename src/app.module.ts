@@ -1,17 +1,13 @@
-// Code: Main module of the application, it imports all the modules and the GraphQL module
 import { Module } from '@nestjs/common'
 import { APP_GUARD } from '@nestjs/core'
 import { GraphQLModule } from '@nestjs/graphql'
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default'
-import { UserModule } from './user/infrastructure/user.module'
 
-// Import app modules
+import { UserModule } from './user/infrastructure/user.module'
 import { CustomerModule } from '@customer/infrastructure/customer.module'
 import { AuthzModule } from 'authz/authz.module'
 import { CommonsModule } from '@commons/infrastructure/commons.module'
-
-// Import app utilities
 import { GqlAuthGuard } from 'authz/authz.guard'
 import { config } from '@commons/infrastructure/config'
 import { PerrmissionsGuard } from 'authz/permissions.guard'
@@ -25,9 +21,8 @@ import { ControlModule } from '@control/infrastructure/control.module'
 import { UndesiredEventModule } from '@undesired-event/infrastructure/undesired-event.module'
 import { VerificationQuestionModule } from '@verification-question/infrastructure/verification-question.module'
 import { ToolModule } from '@tool/infrastructure/tool.module'
-import { graphqlUploadExpress } from 'graphql-upload'
 
-// Control the guard access depending on the environment
+// Guards según ambiente
 const authGuard = {
   provide: APP_GUARD,
   useClass: GqlAuthGuard,
@@ -49,8 +44,7 @@ const customerAccessGuard = {
 }
 
 const providerConfig = []
-// Add the guard only if the environment is not local with no authentication
-if (config.nodeEnv !== 'local') {  
+if (config.nodeEnv !== 'local') {
   providerConfig.push(authGuard, permissionsGuard, rolesGuard, customerAccessGuard)
 }
 
@@ -64,11 +58,6 @@ if (config.nodeEnv !== 'local') {
       playground: false,
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
       context: ({ req, res }) => ({ req, res }),
-      cors: {
-        origin: config.hostnameFrontend,
-        credentials: true,
-      },
-      uploads: false, // Disable built-in upload handling
     }),
     UserModule,
     CustomerModule,
@@ -85,14 +74,4 @@ if (config.nodeEnv !== 'local') {
   controllers: [],
   providers: [...providerConfig],
 })
-export class AppModule {
-  configure(consumer) {
-    // Configure middleware for file uploads
-    consumer
-      .apply(graphqlUploadExpress({
-        maxFileSize: 20 * 1024 * 1024, // 20 MB
-        maxFiles: 1
-      }))
-      .forRoutes('graphql');
-  }
-}
+export class AppModule {}
