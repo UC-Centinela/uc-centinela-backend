@@ -8,7 +8,6 @@ RUN npm install
 
 ARG DATABASE_URL
 ENV DATABASE_URL=$DATABASE_URL
-COPY .env.local .env
 
 COPY prisma ./prisma/
 RUN npx prisma generate
