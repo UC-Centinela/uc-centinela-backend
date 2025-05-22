@@ -5,7 +5,7 @@ dotenv.config()
 export const config: Config = {
   hostnameBackend: process.env.HOSTNAME_FOR_BACKEND || 'http://localhost',
   hostnameFrontend: process.env.HOSTNAME_FOR_FRONTEND as unknown as string[] || ['http://localhost:8080'],
-  portServer: process.env.PORT || '80',
+  portServer: process.env.PORT || '3443',
   nodeEnv: process.env.NODE_ENV || 'development',
   debug: process.env.DEBUG === 'true' || false,
   gcpProjectId: process.env.GCP_PROJECT_ID || 'projects-platform-develop',

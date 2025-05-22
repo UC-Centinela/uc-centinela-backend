@@ -33,6 +33,13 @@ Each domain module follows the hexagonal architecture pattern:
 
 ## Commands 💻
 
+### Docker
+
+To run the docker-compose a script (that copies the corresponding .env and builds the image) located in (/docker/dev-up.sh for dev and /(docker/prod-up.sh for production))should be run using this commands:
+
+- `npm install`: Install all packages from package.json
+
+
 ### Installation
 
 First step to start this project:
