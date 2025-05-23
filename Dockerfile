@@ -6,9 +6,6 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 RUN npm install
 
-ARG DATABASE_URL
-ENV DATABASE_URL=$DATABASE_URL
-
 COPY prisma ./prisma/
 RUN npx prisma generate
 
@@ -21,11 +18,6 @@ FROM node:18-alpine AS final
 
 WORKDIR /usr/src/app
 
-
-ARG NODE_ENV=production
-ENV NODE_ENV $NODE_ENV
-
-
 COPY package*.json ./
 RUN npm install
 
@@ -35,9 +27,10 @@ COPY --from=builder /usr/src/app/node_modules/.prisma ./.prisma
 COPY --from=builder /usr/src/app/src ./src
 
 # Ensure entrypoint script exists and is executable
-COPY docker/entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+COPY docker/entrypoint.sh /docker/entrypoint.sh
+RUN chmod +x /docker/entrypoint.sh
 
 EXPOSE 3443
 
-ENTRYPOINT ["/entrypoint.sh"] 
+COPY docker/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
