@@ -23,7 +23,9 @@ export type Config = {
     endpoint: string,
     apiKey: string,
     serviceInstanceId: string,
-    bucketName: string
+    bucketName: string,
+    ibmAuthEndpoint: string;
+    region: string;
   },
   openai: {
     apiKey: string
