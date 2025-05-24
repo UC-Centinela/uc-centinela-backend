@@ -2,10 +2,11 @@ import { Inject, Injectable } from '@nestjs/common'
 import { ILogger } from '@commons/domain/interfaces/logger.interface'
 import { IAudioExtractorService } from '@multimedia/domain/interfaces/audio-extractor.interface'
 import * as ffmpeg from 'fluent-ffmpeg'
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const ffmpegPath = require('ffmpeg-static')
 import * as fs from 'fs'
 import * as path from 'path'
 import { v4 as uuidv4 } from 'uuid'
-import { resolve4 } from 'dns'
 
 @Injectable()
 export class FFmpegAudioExtractorAdapter implements IAudioExtractorService {
@@ -16,6 +17,8 @@ export class FFmpegAudioExtractorAdapter implements IAudioExtractorService {
   }
 
   async extractAudio (videoBuffer: Buffer, outputFormat: string): Promise<Buffer[]> {
+    
+    // TODO: Dejar este trozo en una función aparte para obtener el video
     const tempDir = path.join(process.cwd(), 'temp')
     if (!fs.existsSync(tempDir)) {
       this.logger.debug(`[extractAudio] Creando carpeta temporal: ${tempDir}`)
@@ -42,6 +45,7 @@ export class FFmpegAudioExtractorAdapter implements IAudioExtractorService {
   private async runFFmpegToExtract (videoPath: string, audioPath: string): Promise<void> {
     return new Promise((resolve, reject) => {
       ffmpeg(videoPath)
+        .setFfmpegPath(ffmpegPath)
         .outputOptions('-ab', '128k')
         .output(audioPath)
         .on('end', () => resolve())
