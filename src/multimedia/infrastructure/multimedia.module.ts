@@ -30,7 +30,7 @@ import { OpenAITranscriptionAdapter } from './adapters/openai-transcription.adap
     FindAllMultimediaUseCase,
     FindOneMultimediaUseCase,
     UploadMediaUseCase,
-    //IBMStorageAdapter,
+    IBMStorageAdapter,
     FFmpegAudioExtractorAdapter,
     OpenAITranscriptionAdapter,
     {
@@ -41,16 +41,9 @@ import { OpenAITranscriptionAdapter } from './adapters/openai-transcription.adap
       provide: IMultimediaStorageAdapter,
       useClass: MultimediaStorageAdapter
     },
-    /*{
-      provide: 'STORAGE_SERVICE',
-      useClass: IBMStorageAdapter
-    },*/
-
     {
       provide: 'STORAGE_SERVICE',
-      useValue: {
-        uploadFile: async () => 'https://fake-storage-url.com/video.mp4',
-        deleteFile: async () => {}}
+      useClass: IBMStorageAdapter
     },
     {
       provide: 'AUDIO_EXTRACTOR_SERVICE',

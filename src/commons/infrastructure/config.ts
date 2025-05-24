@@ -27,7 +27,9 @@ export const config: Config = {
     endpoint: process.env.IBM_COS_ENDPOINT || '',
     apiKey: process.env.IBM_COS_API_KEY || '',
     serviceInstanceId: process.env.IBM_COS_SERVICE_INSTANCE_ID || '',
-    bucketName: process.env.IBM_COS_BUCKET_NAME || ''
+    bucketName: process.env.IBM_COS_BUCKET_NAME || '',
+    ibmAuthEndpoint: process.env.IBM_AUTH_ENDPOINT || 'https://iam.cloud.ibm.com/identity/token',
+    region: process.env.IBM_REGION || 'us-south',
   },
   openai: {
     apiKey: process.env.OPENAI_API_KEY || ''
