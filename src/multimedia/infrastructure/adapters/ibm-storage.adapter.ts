@@ -20,19 +20,6 @@ export class IBMStorageAdapter implements IStorageService {
     const serviceInstanceId = ibmConfig.serviceInstanceId
     const ibmAuthEndpoint = ibmConfig.ibmAuthEndpoint
     const region = ibmConfig.region
-    const bucketName = ibmConfig.bucketName
-
-    // Loguear configuración completa en un solo argumento
-    this.logger.debug(
-      `[IBMStorageAdapter] IBM config: ${JSON.stringify({
-        endpoint,
-        apiKeyId,
-        serviceInstanceId,
-        ibmAuthEndpoint,
-        region,
-        bucketName,
-      })}`
-    )
 
     // Inicializar cliente S3 con autenticación IAM
     this.s3Client = new S3({
@@ -44,10 +31,6 @@ export class IBMStorageAdapter implements IStorageService {
       region,
     })
 
-    // Verificar versión de firma
-    this.logger.debug(
-      `[IBMStorageAdapter] signatureVersion = ${this.s3Client.config.signatureVersion}`
-    )
   }
 
   async uploadFile (
