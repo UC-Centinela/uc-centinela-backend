@@ -193,6 +193,7 @@ type Mutation {
   createMultimedia(input: CreateMultimediaInput!): Multimedia!
   updateMultimedia(input: UpdateMultimediaInput!): Multimedia!
   deleteMultimedia(id: Int!): Boolean!
+  uploadVideo(input: UploadVideoInput!): Multimedia!
   createControlStrategy(input: CreateControlStrategyInput!): ControlStrategy!
   updateControlStrategy(input: UpdateControlStrategyInput!): ControlStrategy!
   deleteControlStrategy(id: Int!): Boolean!
@@ -336,6 +337,13 @@ input UpdateMultimediaInput {
   videoUrl: String
   audioTranscription: String
   id: Int!
+}
+
+input UploadVideoInput {
+  taskId: Int!
+  filename: String!
+  mimetype: String!
+  base64: String!
 }
 
 input CreateControlStrategyInput {
