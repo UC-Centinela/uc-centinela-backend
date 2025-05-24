@@ -16,7 +16,7 @@ export interface UploadVideoDTO {
 
 @Injectable()
 export class UploadMediaUseCase {
-  constructor(
+  constructor (
     @Inject('LOGGER') private readonly logger: ILogger,
     private readonly multimediaRepository: IMultimediaStorageAdapter,
     @Inject('STORAGE_SERVICE') private readonly storageService: IStorageService,
@@ -26,7 +26,7 @@ export class UploadMediaUseCase {
     this.logger.setTraceContext(UploadMediaUseCase.name)
   }
 
-  async execute(dto: UploadVideoDTO): Promise<Multimedia> {
+  async execute (dto: UploadVideoDTO): Promise<Multimedia> {
     this.logger.debug(`[execute] Inicio mutación con archivo: ${dto.filename}`)
 
     try {
@@ -45,7 +45,7 @@ export class UploadMediaUseCase {
     }
   }
 
-  private async processAudioAndTranscription(videoBuffer: Buffer, multimedia: Multimedia): Promise<void> {
+  private async processAudioAndTranscription (videoBuffer: Buffer, multimedia: Multimedia): Promise<void> {
     try {
       const audioBuffers = await this.audioExtractorService.extractAudio(videoBuffer, 'mp3')
       let transcription = ''

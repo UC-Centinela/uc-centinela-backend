@@ -7,13 +7,13 @@ import * as FormData from 'form-data'
 
 @Injectable()
 export class OpenAITranscriptionAdapter implements ITranscriptionService {
-  constructor(
+  constructor (
     @Inject('LOGGER') private readonly logger: ILogger
   ) {
     this.logger.setTraceContext(OpenAITranscriptionAdapter.name)
   }
 
-  async transcribe(audioBuffer: Buffer): Promise<string> {
+  async transcribe (audioBuffer: Buffer): Promise<string> {
     this.logger.debug(`[transcribe] Iniciando transcripción con Whisper API...`)
 
     if (!audioBuffer || !Buffer.isBuffer(audioBuffer) || audioBuffer.length === 0) {

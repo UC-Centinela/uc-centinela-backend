@@ -9,13 +9,13 @@ import { resolve4 } from 'dns'
 
 @Injectable()
 export class FFmpegAudioExtractorAdapter implements IAudioExtractorService {
-  constructor(
+  constructor (
     @Inject('LOGGER') private readonly logger: ILogger
   ) {
     this.logger.setTraceContext(FFmpegAudioExtractorAdapter.name)
   }
 
-  async extractAudio(videoBuffer: Buffer, outputFormat: string): Promise<Buffer[]> {
+  async extractAudio (videoBuffer: Buffer, outputFormat: string): Promise<Buffer[]> {
     const tempDir = path.join(process.cwd(), 'temp')
     if (!fs.existsSync(tempDir)) {
       this.logger.debug(`[extractAudio] Creando carpeta temporal: ${tempDir}`)
@@ -39,7 +39,7 @@ export class FFmpegAudioExtractorAdapter implements IAudioExtractorService {
     return baseBuffers
   }
 
-  private async runFFmpegToExtract(videoPath: string, audioPath: string): Promise<void> {
+  private async runFFmpegToExtract (videoPath: string, audioPath: string): Promise<void> {
     return new Promise((resolve, reject) => {
       ffmpeg(videoPath)
         .outputOptions('-ab', '128k')
@@ -50,7 +50,7 @@ export class FFmpegAudioExtractorAdapter implements IAudioExtractorService {
     })
   }
 
-  private async splitRecursively(inputPath: string, maxInitialMB: number, maxFinalMB: number): Promise<Buffer[]> {
+  private async splitRecursively (inputPath: string, maxInitialMB: number, maxFinalMB: number): Promise<Buffer[]> {
     const results: Buffer[] = []
     const sizeMB = fs.statSync(inputPath).size / (1024 * 1024)
 
