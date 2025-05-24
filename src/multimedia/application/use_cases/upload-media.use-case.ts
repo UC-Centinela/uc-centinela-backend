@@ -5,7 +5,6 @@ import { IMultimediaStorageAdapter } from '@multimedia/domain/interfaces/multime
 import { IStorageService } from '@multimedia/domain/interfaces/storage.interface'
 import { IAudioExtractorService } from '@multimedia/domain/interfaces/audio-extractor.interface'
 import { ITranscriptionService } from '@multimedia/domain/interfaces/transcription.interface'
-import { CreateMultimediaDTO } from '@multimedia/domain/interfaces/multimedia.interface'
 
 export interface UploadVideoDTO {
   taskId: number
