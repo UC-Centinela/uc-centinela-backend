@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common'
 import { ILogger } from '@commons/domain/interfaces/logger.interface'
 import { IAudioExtractorService } from '@multimedia/domain/interfaces/audio-extractor.interface'
 import * as ffmpeg from 'fluent-ffmpeg'
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const ffmpegPath = require('ffmpeg-static')
 import * as fs from 'fs'
 import * as path from 'path'
