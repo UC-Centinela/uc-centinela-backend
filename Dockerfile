@@ -23,8 +23,10 @@ RUN npm install
 
 COPY --from=builder /usr/src/app/dist ./dist
 COPY --from=builder /usr/src/app/prisma ./prisma
-COPY --from=builder /usr/src/app/node_modules/.prisma ./.prisma
 COPY --from=builder /usr/src/app/src ./src
+
+# Generate Prisma client in the final image
+RUN npx prisma generate
 
 # Ensure entrypoint script exists and is executable
 COPY docker/entrypoint.sh /docker/entrypoint.sh
@@ -34,3 +36,6 @@ EXPOSE 3443
 
 COPY docker/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["node", "dist/main.js"]
