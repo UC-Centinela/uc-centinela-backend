@@ -41,4 +41,40 @@ describe('ControlResolver', () => {
   it('should be defined', () => {
     expect(resolver).toBeDefined()
   })
+  it('should call create on the service', async () => {
+    const input = {
+      title: 'Test control',
+      description: 'desc',
+      criticActivityId: 1,
+    }
+    const service = (resolver as any).service
+    await resolver.createControl(input)
+    expect(service.create).toHaveBeenCalledWith(input)
+  })
+
+  it('should call findAll on the service', async () => {
+    const service = (resolver as any).service
+    await resolver.findAllControls()
+    expect(service.findAll).toHaveBeenCalled()
+  })
+
+  it('should call findOne on the service', async () => {
+    const service = (resolver as any).service
+    await resolver.findControl(42)
+    expect(service.findOne).toHaveBeenCalledWith(42)
+  })
+
+  it('should call update on the service', async () => {
+    const input = { id: 1, title: 'Updated title', description: 'Updated desc' }
+    const service = (resolver as any).service
+    await resolver.updateControl(input)
+    expect(service.update).toHaveBeenCalledWith({ id: input.id, updateControl: input })
+  })
+
+  it('should call delete on the service', async () => {
+    const service = (resolver as any).service
+    await resolver.deleteControl(99)
+    expect(service.delete).toHaveBeenCalledWith(99)
+  })
+
 })

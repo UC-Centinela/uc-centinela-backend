@@ -42,4 +42,52 @@ describe('ToolResolver', () => {
   it('should be defined', () => {
     expect(resolver).toBeDefined()
   })
+
+  it('should call createTool on the service', async () => {
+    const input = {
+      title: 'Tool A',
+      description: 'Description A',
+      criticActivityId: 42
+    }
+    const service = (resolver as any).service
+    await resolver.createTool(input)
+    expect(service.create).toHaveBeenCalledWith(input)
+  })
+
+  it('should call findAllTools on the service', async () => {
+    const service = (resolver as any).service
+    await resolver.findAllTools()
+    expect(service.findAll).toHaveBeenCalled()
+  })
+
+  it('should call findTool on the service', async () => {
+    const service = (resolver as any).service
+    await resolver.findTool(12)
+    expect(service.findOne).toHaveBeenCalledWith(12)
+  })
+
+  it('should call findToolsByCriticActivity on the service', async () => {
+    const service = (resolver as any).service
+    await resolver.findToolsByCriticActivity(7)
+    expect(service.findAllByCriticActivityId).toHaveBeenCalledWith(7)
+  })
+
+  it('should call updateTool on the service', async () => {
+    const input = {
+      id: 10,
+      title: 'Updated Tool',
+      description: 'Updated Desc',
+      criticActivityId: 5
+    }
+    const service = (resolver as any).service
+    await resolver.updateTool(input)
+    expect(service.update).toHaveBeenCalledWith({ id: input.id, updateTool: input })
+  })
+
+  it('should call deleteTool on the service', async () => {
+    const service = (resolver as any).service
+    await resolver.deleteTool(123)
+    expect(service.delete).toHaveBeenCalledWith(123)
+  })
+
 })
