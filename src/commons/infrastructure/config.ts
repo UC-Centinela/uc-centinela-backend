@@ -4,7 +4,7 @@ dotenv.config()
 
 export const config: Config = {
   hostnameBackend: process.env.HOSTNAME_FOR_BACKEND || 'http://localhost',
-  hostnameFrontend: process.env.HOSTNAME_FOR_FRONTEND as unknown as string[] || ['http://localhost:8080'],
+  hostnameFrontend: process.env.HOSTNAME_FOR_FRONTEND ? process.env.HOSTNAME_FOR_FRONTEND.split(',').map(url => url.trim()) : ['http://localhost:8080'],
   portServer: process.env.PORT_NUMBER || '80',
   nodeEnv: process.env.NODE_ENV || 'development',
   debug: process.env.DEBUG === 'true' || false,

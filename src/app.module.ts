@@ -61,6 +61,7 @@ if (config.nodeEnv !== 'local') {
       autoSchemaFile: 'src/commons/infrastructure/schema.gql',
       installSubscriptionHandlers: true,
       playground: false,
+      introspection: true,
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
     }),
     UserModule,

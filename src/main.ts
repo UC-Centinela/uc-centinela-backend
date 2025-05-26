@@ -47,7 +47,7 @@ async function bootstrap () {
     })
 
     // Init Nest
-    const port = process.env.PORT || config.portServer || 3443;
+    const port = process.env.PORT || process.env.PORT_NUMBER || config.portServer || 3443;
     const host = process.env.HOST || '0.0.0.0';
 
     await app.listen(port, host);
