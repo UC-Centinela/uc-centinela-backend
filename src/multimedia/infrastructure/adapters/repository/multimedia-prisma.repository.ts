@@ -29,6 +29,11 @@ export class MultimediaStorageAdapter implements IMultimediaStorageAdapter {
     return mapPrismaMultimediaToDomain(result)
   }
 
+  async findByTaskId (taskId: number): Promise<Multimedia[]> {
+    const result = await this.storage.getByTaskId(taskId)
+    return result.map(mapPrismaMultimediaToDomain)
+  }
+
   async update (multimedia: Multimedia): Promise<Multimedia> {
     const updated = await this.storage.updateMultimedia(multimedia.id, {
       photoUrl: multimedia.photoUrl,
