@@ -60,4 +60,8 @@ export class TaskStorageAdapter implements ITaskStorageAdapter {
     return result.map(mapPrismaTaskToDomain)
   }
 
+  async findAllByReviewerId (revisorId: number): Promise<Task[]> {
+    const tasks = await this.storage.findAllByReviewerId(revisorId)
+    return tasks.map(mapPrismaTaskToDomain)
+  }
 }
