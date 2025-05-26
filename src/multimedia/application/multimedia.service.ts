@@ -4,6 +4,7 @@ import { DeleteMultimediaUseCase } from './use_cases/delete-multimedia.use-case'
 import { FindAllMultimediaUseCase } from './use_cases/find-all-multimedia.use-case'
 import { FindOneMultimediaUseCase } from './use_cases/find-one-multimedia.use-case'
 import { UpdateMultimediaUseCase } from './use_cases/update-multimedia.use-case'
+import { FindByTaskIdMultimediaUseCase } from './use_cases/find-by-task-id-multimedia.use-case'
 import { IMultimediaService, CreateMultimediaDTO, UpdateMultimediaDTO } from '@multimedia/domain/interfaces/multimedia.interface'
 import { Multimedia } from '@multimedia/domain/multimedia'
 
@@ -14,7 +15,8 @@ export class MultimediaService implements IMultimediaService {
     private readonly updateMultimedia: UpdateMultimediaUseCase,
     private readonly findAllMultimedia: FindAllMultimediaUseCase,
     private readonly findOneMultimedia: FindOneMultimediaUseCase,
-    private readonly deleteMultimedia: DeleteMultimediaUseCase
+    private readonly deleteMultimedia: DeleteMultimediaUseCase,
+    private readonly findByTaskIdMultimedia: FindByTaskIdMultimediaUseCase
   ) {}
 
   create (dto: CreateMultimediaDTO): Promise<Multimedia> {
@@ -27,6 +29,10 @@ export class MultimediaService implements IMultimediaService {
 
   findOne (id: number): Promise<Multimedia> {
     return this.findOneMultimedia.execute(id)
+  }
+
+  findByTaskId (taskId: number): Promise<Multimedia[]> {
+    return this.findByTaskIdMultimedia.execute(taskId)
   }
 
   update (dto: UpdateMultimediaDTO): Promise<Multimedia> {

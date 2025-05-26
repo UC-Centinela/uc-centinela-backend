@@ -12,6 +12,7 @@ import { UpdateMultimediaUseCase } from '@multimedia/application/use_cases/updat
 import { DeleteMultimediaUseCase } from '@multimedia/application/use_cases/delete-multimedia.use-case'
 import { FindAllMultimediaUseCase } from '@multimedia/application/use_cases/find-all-multimedia.use-case'
 import { FindOneMultimediaUseCase } from '@multimedia/application/use_cases/find-one-multimedia.use-case'
+import { FindByTaskIdMultimediaUseCase } from '@multimedia/application/use_cases/find-by-task-id-multimedia.use-case'
 import { UploadMediaUseCase } from '@multimedia/application/use_cases/upload-media.use-case'
 import { IBMStorageAdapter } from './adapters/ibm-storage.adapter'
 import { FFmpegAudioExtractorAdapter } from './adapters/ffmpeg-audio-extractor.adapter'
@@ -29,6 +30,7 @@ import { OpenAITranscriptionAdapter } from './adapters/openai-transcription.adap
     DeleteMultimediaUseCase,
     FindAllMultimediaUseCase,
     FindOneMultimediaUseCase,
+    FindByTaskIdMultimediaUseCase,
     UploadMediaUseCase,
     IBMStorageAdapter,
     FFmpegAudioExtractorAdapter,
