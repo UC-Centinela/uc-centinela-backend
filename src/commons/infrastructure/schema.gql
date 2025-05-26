@@ -139,6 +139,7 @@ type Query {
   findAllTasks: [Task!]!
   findTask(id: Int!): Task!
   findTasksByUser(userId: Int!): [Task!]!
+  findTasksByReviewer(revisorId: Int!): [Task!]!
   findAllCriticActivities: [CriticActivity!]!
   findCriticActivity(id: Float!): CriticActivity!
   findAllCriticActivitiesByTask(taskId: Float!): [CriticActivity!]!

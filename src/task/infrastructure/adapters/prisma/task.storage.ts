@@ -30,4 +30,9 @@ export class TaskStorage {
     return this.prisma.task.findMany({ where: { creatorUserId: userId } })
   }
 
+  async findAllByReviewerId (revisorId: number): Promise<Task[]> {
+    return this.prisma.task.findMany({
+      where: { revisorUserId: revisorId }
+    })
+  }
 }

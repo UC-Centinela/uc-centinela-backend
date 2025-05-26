@@ -6,6 +6,7 @@ import { FindOneTaskUseCase } from './use_cases/find-one-task.use-case'
 import { UpdateTaskUseCase } from './use_cases/update-task.use-case'
 import { FindByUserIdTaskUseCase } from './use_cases/find-by-user-id-task.use-case'
 import { ITaskService, CreateTaskDTO, UpdateTaskDTO } from '@task/domain/interfaces/task.interface'
+import { FindByReviewerIdTaskUseCase } from './use_cases/find-by-reviewer-id-task.use-case'
 import { Task } from '@task/domain/task'
 
 @Injectable()
@@ -16,7 +17,8 @@ export class TaskService implements ITaskService {
     private readonly findAllTask: FindAllTaskUseCase,
     private readonly findOneTask: FindOneTaskUseCase,
     private readonly deleteTask: DeleteTaskUseCase,
-    private readonly findByUserIdTask: FindByUserIdTaskUseCase
+    private readonly findByUserIdTask: FindByUserIdTaskUseCase,
+    private readonly findByReviewerIdTask: FindByReviewerIdTaskUseCase
   ) {}
 
   create (dto: CreateTaskDTO): Promise<Task> {
@@ -41,5 +43,9 @@ export class TaskService implements ITaskService {
 
   findAllByUserId (userId: number): Promise<Task[]> {
     return this.findByUserIdTask.execute(userId)
+  }
+
+  findAllByReviewerId (revisorId: number): Promise<Task[]> {
+    return this.findByReviewerIdTask.execute(revisorId)
   }
 }
