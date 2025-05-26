@@ -16,3 +16,4 @@ credentials.json
 .qodo
 /logs
 .env.local
+/temp

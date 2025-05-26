@@ -6,12 +6,15 @@ import { UpdateMultimediaInput } from '../dto/update-multimedia.input'
 import { Inject } from '@nestjs/common'
 import { ILogger } from '@commons/domain/interfaces/logger.interface'
 import { Permissions } from '@authz/permissions.decorator'
+import { UploadVideoInput } from '../dto/upload-video.input'
+import { UploadMediaUseCase } from '@multimedia/application/use_cases/upload-media.use-case'
 
 @Resolver(() => Multimedia)
 export class MultimediaResolver {
   constructor (
     @Inject('IMultimediaService') private readonly multimediaService: IMultimediaService,
-    @Inject('LOGGER') private readonly logger: ILogger
+    @Inject('LOGGER') private readonly logger: ILogger,
+    @Inject(UploadMediaUseCase) private readonly uploadMediaUseCase: UploadMediaUseCase
   ) {
     this.logger.setTraceContext('MultimediaResolver')
   }
@@ -42,5 +45,20 @@ export class MultimediaResolver {
   @Mutation(() => Boolean)
   deleteMultimedia (@Args('id', { type: () => Int }) id: number) {
     return this.multimediaService.delete(id)
+  }
+
+  @Permissions('create:multimedia')
+  @Mutation(() => Multimedia)
+  async uploadVideo (@Args('input') input: UploadVideoInput) {
+    this.logger.debug('[uploadVideo] Uploading video for task: ' + input.taskId)
+
+    const buffer = Buffer.from(input.base64, 'base64')
+
+    return this.uploadMediaUseCase.execute({
+      taskId: input.taskId,
+      videoBuffer: buffer,
+      filename: input.filename,
+      mimetype: input.mimetype
+    })
   }
 }

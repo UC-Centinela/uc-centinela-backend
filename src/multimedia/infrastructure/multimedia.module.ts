@@ -12,6 +12,10 @@ import { UpdateMultimediaUseCase } from '@multimedia/application/use_cases/updat
 import { DeleteMultimediaUseCase } from '@multimedia/application/use_cases/delete-multimedia.use-case'
 import { FindAllMultimediaUseCase } from '@multimedia/application/use_cases/find-all-multimedia.use-case'
 import { FindOneMultimediaUseCase } from '@multimedia/application/use_cases/find-one-multimedia.use-case'
+import { UploadMediaUseCase } from '@multimedia/application/use_cases/upload-media.use-case'
+import { IBMStorageAdapter } from './adapters/ibm-storage.adapter'
+import { FFmpegAudioExtractorAdapter } from './adapters/ffmpeg-audio-extractor.adapter'
+import { OpenAITranscriptionAdapter } from './adapters/openai-transcription.adapter'
 
 @Module({
   imports: [CommonsModule],
@@ -25,6 +29,10 @@ import { FindOneMultimediaUseCase } from '@multimedia/application/use_cases/find
     DeleteMultimediaUseCase,
     FindAllMultimediaUseCase,
     FindOneMultimediaUseCase,
+    UploadMediaUseCase,
+    IBMStorageAdapter,
+    FFmpegAudioExtractorAdapter,
+    OpenAITranscriptionAdapter,
     {
       provide: 'IMultimediaService',
       useClass: MultimediaService
@@ -32,6 +40,18 @@ import { FindOneMultimediaUseCase } from '@multimedia/application/use_cases/find
     {
       provide: IMultimediaStorageAdapter,
       useClass: MultimediaStorageAdapter
+    },
+    {
+      provide: 'STORAGE_SERVICE',
+      useClass: IBMStorageAdapter
+    },
+    {
+      provide: 'AUDIO_EXTRACTOR_SERVICE',
+      useClass: FFmpegAudioExtractorAdapter
+    },
+    {
+      provide: 'TRANSCRIPTION_SERVICE',
+      useClass: OpenAITranscriptionAdapter
     }
   ],
   exports: ['IMultimediaService']

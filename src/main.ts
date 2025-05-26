@@ -15,6 +15,7 @@ async function bootstrap () {
     const app = await NestFactory.create<NestFastifyApplication>(
       AppModule,
       new FastifyAdapter({
+        bodyLimit: 100 * 1024 * 1024, //100MB aunque aquí hay que cambiarlo si se desea menos
         https: config.nodeEnv === 'local-auth' ? 
           {
             key: readFileSync(join(__dirname, `../ssl/${config.hostnameBackend}-key.pem`)),

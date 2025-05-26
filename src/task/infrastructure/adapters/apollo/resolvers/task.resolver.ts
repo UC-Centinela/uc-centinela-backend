@@ -49,4 +49,8 @@ export class TaskResolver {
     return this.taskService.findAllByUserId(userId)
   }
 
+  @Query(() => [Task])
+  findTasksByReviewer (@Args('revisorId', { type: () => Int }) revisorId: number) {
+    return this.taskService.findAllByReviewerId(revisorId)
+  }
 }

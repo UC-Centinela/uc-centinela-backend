@@ -24,4 +24,5 @@ export interface ITaskService {
   update(dto: UpdateTaskDTO): Promise<Task>;
   delete(id: number): Promise<boolean>;
   findAllByUserId(userId: number): Promise<Task[]>;
+  findAllByReviewerId(revisorId: number): Promise<Task[]>;
 }
