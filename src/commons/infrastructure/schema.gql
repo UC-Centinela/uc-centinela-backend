@@ -145,6 +145,7 @@ type Query {
   findAllCriticActivitiesByTask(taskId: Float!): [CriticActivity!]!
   findAllMultimedia: [Multimedia!]!
   findMultimedia(id: Int!): Multimedia!
+  findMultimediaByTaskId(taskId: Int!): [Multimedia!]!
   findAllControlStrategies: [ControlStrategy!]!
   findControlStrategy(id: Int!): ControlStrategy!
   findAllControls: [Control!]!
