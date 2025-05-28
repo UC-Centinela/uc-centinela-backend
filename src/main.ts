@@ -48,11 +48,11 @@ async function bootstrap () {
     })
 
     // Init Nest
-    const port = process.env.PORT || process.env.PORT_NUMBER || config.portServer || 3443;
-    const host = process.env.HOST || '0.0.0.0';
+    const port = process.env.PORT || process.env.PORT_NUMBER || config.portServer || 3443
+    const host = process.env.HOST || '0.0.0.0'
 
-    await app.listen(port, host);
-    Logger.log(`Server running at http://${host}:${port}`, 'Bootstrap');
+    await app.listen(port, host)
+    Logger.log(`Server running at http://${host}:${port}`, 'Bootstrap')
   } catch (error) {
     if (error.code === 'ENOENT') {
       Logger.error(
