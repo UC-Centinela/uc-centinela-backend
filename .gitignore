@@ -15,5 +15,5 @@ credentials.json
 /coverage
 .qodo
 /logs
-
+.env.local
 /temp
