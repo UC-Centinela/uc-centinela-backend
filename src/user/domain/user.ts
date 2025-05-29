@@ -79,7 +79,7 @@ export class User {
   // Factory method para crear usuarios
   static create (props: Omit<UserProps, 'id'>): User {
     // Validaciones de dominio
-    if (!props.email.includes('@')) {
+    if (!props.email || !props.email.includes('@') || props.email === '@') {
       throw new Error('Invalid email')
     }
 
