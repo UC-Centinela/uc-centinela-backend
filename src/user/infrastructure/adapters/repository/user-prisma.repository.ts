@@ -1,5 +1,5 @@
-import { IUserStorageAdapter } from "user/domain/interfaces/user.repository"
-import { Role, User } from "user/domain/user"
+import { IUserStorageAdapter } from '@user/domain/interfaces/user.repository'
+import { Role, User } from '@user/domain/user'
 import { UserStorage } from "../prisma/user.storage"
 import { Injectable } from "@nestjs/common"
 
