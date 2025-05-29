@@ -55,8 +55,8 @@ describe('Auth0IdentityProviderService', () => {
   it('crea usuario nuevo con éxito (201)', async () => {
     mockClient.post
       .mockResolvedValueOnce({ status: 200, data: { access_token: 't' } }) // auth
-      .mockResolvedValueOnce({ status: 201, data: { user_id: 'abc' } })    // create
-      .mockResolvedValueOnce({ status: 200, data: {} })                   // changePassword
+      .mockResolvedValueOnce({ status: 201, data: { user_id: 'abc' } }) // create
+      .mockResolvedValueOnce({ status: 200, data: {} }) // changePassword
 
     const user = await service.createUser({ email: 'a@b.com', name: '', given_name: 'G', family_name: 'F' })
     expect(user.user_id).toBe('abc')
@@ -65,9 +65,9 @@ describe('Auth0IdentityProviderService', () => {
   it('detecta usuario existente (409) y lo busca', async () => {
     mockClient.post
       .mockResolvedValueOnce({ status: 200, data: { access_token: 'token' } }) // auth
-      .mockResolvedValueOnce({ status: 409, data: 'user exists' })             // create
+      .mockResolvedValueOnce({ status: 409, data: 'user exists' }) // create
     mockClient.get
-      .mockResolvedValueOnce({ status: 200, data: [{ user_id: 'xyz' }] })      // getUser
+      .mockResolvedValueOnce({ status: 200, data: [{ user_id: 'xyz' }] }) // getUser
 
     const user = await service.createUser({ email: 'a@b.com', name: '', given_name: 'G', family_name: 'F' })
     expect(user.user_id).toBe('xyz')

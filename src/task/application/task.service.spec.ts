@@ -9,7 +9,6 @@ import { FindAllTaskUseCase } from './use_cases/find-all-task.use-case'
 import { FindOneTaskUseCase } from './use_cases/find-one-task.use-case'
 import { FindByUserIdTaskUseCase } from './use_cases/find-by-user-id-task.use-case'
 
-
 const moduleMocker = new ModuleMocker(global)
 
 describe('TaskService', () => {
