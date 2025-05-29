@@ -5,7 +5,10 @@ describe('AppModule', () => {
   it('should compile without errors', async () => {
     const moduleRef = await Test.createTestingModule({
       imports: [AppModule],
-    }).compile()
+    })
+      .overrideProvider('IBMStorageAdapter')
+      .useValue({})
+      .compile()
 
     expect(moduleRef).toBeDefined()
   })
