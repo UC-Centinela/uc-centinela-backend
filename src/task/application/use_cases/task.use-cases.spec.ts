@@ -17,7 +17,8 @@ describe('Task Use Cases', () => {
       delete: jest.fn(),
       findAll: jest.fn(),
       findOne: jest.fn(),
-      findAllByUserId: jest.fn()
+      findAllByUserId: jest.fn(),
+      findAllByReviewerId: jest.fn(),
     }
   })
 
