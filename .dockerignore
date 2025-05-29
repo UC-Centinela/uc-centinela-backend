@@ -1,0 +1,17 @@
+node_modules
+npm-debug.log
+Dockerfile
+.dockerignore
+docker-compose.yml
+.git
+.gitignore
+README.md
+dist
+logs
+.env
+
+# Add any other files or directories that should not be included in the Docker image
+# For example, if you have local test reports or IDE-specific folders:
+# .vscode
+# .idea
+# coverage 

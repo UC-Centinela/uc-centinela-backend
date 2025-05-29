@@ -1,17 +1,24 @@
+# container/Dockerfile
 FROM node:20-bullseye-slim as builder
-# RUN apk add make
 WORKDIR /app
+
 COPY . .
+
 RUN npm install
 RUN npm run build
 RUN npm run prisma:client
-RUN sed -i 's/src/dist/g' package.json
+
+# If you truly need this sed step, be explicit:
+# RUN sed -i 's/"src\//"dist\//g' package.json
 
 FROM node:20-bullseye-slim
 WORKDIR /app
-COPY --from=builder /app/dist dist
-COPY --from=builder /app/node_modules node_modules
-COPY /prisma prisma
-COPY /container/entrypoint.sh /app/entrypoint.sh
-RUN chmod +x /app/entrypoint.sh
+
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/prisma ./prisma
+COPY ./container/entrypoint.sh ./entrypoint.sh
+
+RUN chmod +x ./entrypoint.sh
+
 ENTRYPOINT ["./entrypoint.sh"]

@@ -37,6 +37,12 @@ export class MultimediaResolver {
     return this.multimediaService.findOne(id)
   }
 
+  @Query(() => [Multimedia])
+  findMultimediaByTaskId (@Args('taskId', { type: () => Int }) taskId: number) {
+    this.logger.debug(`[findMultimediaByTaskId] Fetching multimedia for task: ${taskId}`)
+    return this.multimediaService.findByTaskId(taskId)
+  }
+
   @Mutation(() => Multimedia)
   updateMultimedia (@Args('input') input: UpdateMultimediaInput) {
     return this.multimediaService.update({ id: input.id, updateMultimedia: input })

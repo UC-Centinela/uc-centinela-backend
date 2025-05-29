@@ -18,6 +18,10 @@ export class MultimediaStorage {
     return this.prisma.multimedia.findUnique({ where: { id } })
   }
 
+  async getByTaskId (taskId: number): Promise<PrismaMultimedia[]> {
+    return this.prisma.multimedia.findMany({ where: { taskId } })
+  }
+
   async updateMultimedia (id: number, data: Prisma.MultimediaUpdateInput): Promise<PrismaMultimedia> {
     return this.prisma.multimedia.update({ where: { id }, data })
   }

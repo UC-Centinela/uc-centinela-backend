@@ -36,7 +36,7 @@ export class UploadMediaUseCase {
       })
 
       const saved = await this.multimediaRepository.create(multimedia)
-      this.processAudioAndTranscription(dto.videoBuffer, saved)
+      await this.processAudioAndTranscription(dto.videoBuffer, saved)
       return saved
     } catch (error) {
       this.logger.error(`[execute] Error al subir video: ${error.message}`)

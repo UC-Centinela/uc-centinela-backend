@@ -33,11 +33,87 @@ Each domain module follows the hexagonal architecture pattern:
 
 ## Commands 💻
 
-### Installation
+## 🔧 Desarrollo Local (Docker Compose)
 
-First step to start this project:
+### Ubicación de archivos
+- **Configuración**: `dev/docker-compose.yml` y `dev/Dockerfile`
+- **Variables de entorno**: `.env.local` (en la raíz del proyecto)
+- **Scripts**: `dev/dev-start.sh` y `dev/dev-stop.sh`
 
-- `npm install`: Install all packages from package.json
+### Cómo ejecutar
+
+#### Opción 1: Usar el script (recomendado)
+```bash
+cd dev && ./dev-start.sh
+```
+
+#### Opción 2: Comandos manuales
+```bash
+cd dev
+docker-compose up --build -d
+```
+
+### Características del entorno de desarrollo
+- Base de datos PostgreSQL local en puerto `5433`
+- Aplicación en `http://localhost:3443/graphql`
+- Autenticación deshabilitada (`NODE_ENV=development`)
+- Migraciones automáticas al iniciar
+- Logs visibles para debugging
+
+---
+
+## 🚀 Producción (Docker image)
+
+### Ubicación de archivos
+- **Dockerfile**: `Dockerfile` (en la raíz)
+- **Script de entrada**: `docker/entrypoint.sh`
+
+### Cómo ejecutar
+
+#### 1. Construir imagen
+```bash
+docker build -t uc-centinela-backend:latest .
+```
+
+#### 2. Ejecutar contenedor
+```bash
+docker run -p 3443:3443 \
+  -e NODE_ENV=production \
+  -e HOST=0.0.0.0 \
+  -e PORT=3443 \
+  -e "HOSTNAME_FOR_FRONTEND=http://localhost:3443,http://localhost:8080" \
+  -e "DATABASE_URL=postgres://ibm_cloud_b262ba7a_f7ae_4d0b_aa03_251bd4e93e82:Xc6UgOv7iMSAL3sRAd1XL2sElb3PPXim@b4758099-5f4e-48b9-9135-2bfa98515539.8117147f814b4b2ea643610826cd2046.databases.appdomain.cloud:30157/ibmclouddb?sslmode=verify-full" \
+  --rm uc-centinela-backend:latest
+```
+
+Esto simula lo que hace IBM cuando corre la imagen. 
+
+## 🛠️ Solución de Problemas
+
+### Error: "port is already allocated"
+```bash
+# Verificar contenedores en ejecución
+docker ps
+
+# Detener contenedor específico
+docker stop <container_name>
+
+# O detener todos los contenedores
+docker stop $(docker ps -q)
+```
+
+### Error de CORS
+Verificar que `HOSTNAME_FOR_FRONTEND` incluya el origen correcto:
+```bash
+-e "HOSTNAME_FOR_FRONTEND=http://localhost:3443,http://localhost:8080"
+```
+
+### Error de introspección
+La introspección está habilitada por defecto. Si persiste el error, verificar la configuración en `src/app.module.ts`:
+```typescript
+introspection: true,
+```
+```
 
 ### Development
 
