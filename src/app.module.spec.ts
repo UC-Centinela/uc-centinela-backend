@@ -1,7 +1,5 @@
 import { Test } from '@nestjs/testing'
 import { AppModule } from './app.module'
-import { IBMStorageAdapter } from './multimedia/infrastructure/adapters/ibm-storage.adapter'
-import { config } from '@commons/infrastructure/config'
 
 // Mock the config object
 jest.mock('@commons/infrastructure/config', () => ({
