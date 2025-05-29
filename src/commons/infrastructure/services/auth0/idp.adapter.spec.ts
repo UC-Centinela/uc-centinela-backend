@@ -1,5 +1,4 @@
 import { Auth0IdentityProviderService } from './idp.adapter'
-import { config } from '@commons/infrastructure/config'
 import { Role } from '@user/domain/user'
 
 jest.mock('@commons/infrastructure/config', () => ({

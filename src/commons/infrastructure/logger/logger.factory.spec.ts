@@ -1,5 +1,4 @@
 import { LoggerFactory } from './logger.factory'
-import * as winston from 'winston'
 import { Config } from '@commons/domain/config.entity'
 
 describe('LoggerFactory', () => {

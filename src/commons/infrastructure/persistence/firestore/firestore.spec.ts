@@ -1,5 +1,4 @@
 import FirestoreAdapter from './firestore'
-import { FieldValue } from 'firebase-admin/firestore'
 
 jest.mock('firebase-admin/app', () => ({
   initializeApp: jest.fn()

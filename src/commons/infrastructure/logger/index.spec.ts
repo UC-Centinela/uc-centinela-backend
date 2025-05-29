@@ -1,7 +1,7 @@
 import { WinstonLogger } from './index'
 
 // Usa la implementación real de Logger de NestJS para evitar errores de decorador
-const { Logger } = jest.requireActual('@nestjs/common')
+jest.requireActual('@nestjs/common')
 
 describe('WinstonLogger', () => {
   let logger: WinstonLogger
