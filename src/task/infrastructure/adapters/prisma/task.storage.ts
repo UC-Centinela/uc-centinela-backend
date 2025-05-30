@@ -21,7 +21,7 @@ export class TaskStorage {
   async updateTask (id: number, data: Prisma.TaskUpdateInput): Promise<Task> {
     // Filtramos los campos indefinidos
     const cleanData = Object.fromEntries(
-      Object.entries(data).filter(([_, value]) => value !== undefined)
+      Object.entries(data).filter(([value]) => value !== undefined)
     )
 
     return this.prisma.task.update({
