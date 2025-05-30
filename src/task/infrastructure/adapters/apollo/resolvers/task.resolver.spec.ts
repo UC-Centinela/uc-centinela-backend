@@ -86,10 +86,10 @@ describe('TaskResolver', () => {
     expect(taskService.findAll).toHaveBeenCalled()
   })
 
-  it('retorna una tarea por ID', async () => {
-    const result = await resolver.findTask(1)
-    expect(result).toEqual(mockTask)
-    expect(taskService.findOne).toHaveBeenCalledWith(1)
+  it('llama a findTask con id', async () => {
+    const result = await resolver.findTask(1, 'test@example.com')
+    expect(result).toBe(mockTask)
+    expect(taskService.findOne).toHaveBeenCalledWith(1, 'test@example.com')
   })
 
   it('actualiza una tarea', async () => {
@@ -123,9 +123,9 @@ describe('TaskResolver', () => {
     await expect(resolver.findAllTasks()).rejects.toThrow('Fallo findAll')
   })
 
-  it('lanza error si findOne falla', async () => {
-    taskService.findOne.mockRejectedValueOnce(new Error('Fallo findOne'))
-    await expect(resolver.findTask(1)).rejects.toThrow('Fallo findOne')
+  it('maneja error en findTask', async () => {
+    taskService.findOne.mockRejectedValue(new Error('Fallo findOne'))
+    await expect(resolver.findTask(1, 'test@example.com')).rejects.toThrow('Fallo findOne')
   })
 
   it('lanza error si update falla', async () => {
