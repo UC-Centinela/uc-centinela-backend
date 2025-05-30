@@ -90,7 +90,7 @@ describe('CreateUserUseCase', () => {
     })
 
     describe('Caso 2: Usuario existe sin IDP', () => {
-      it('debería actualizar usuario existente con nuevo IDP en producción', async () => {
+      it('debería actualizar usuario existente con nuevo IDP incluso en ambiente local', async () => {
         const existingUser = sampleUser.update({ idpId: null })
         const updatedUser = existingUser.update({ idpId: 'auth0|123' })
         
@@ -99,7 +99,7 @@ describe('CreateUserUseCase', () => {
         mockIdp.assignRole.mockResolvedValue()
         mockRepo.update.mockResolvedValue(updatedUser)
 
-        process.env.NODE_ENV = 'production'
+        process.env.NODE_ENV = 'local'
         const result = await useCase.execute(createUserDTO)
 
         expect(result.idpId).toBe('auth0|123')
@@ -107,35 +107,22 @@ describe('CreateUserUseCase', () => {
         expect(mockIdp.assignRole).toHaveBeenCalledWith('auth0|123', Role.ADMIN)
       })
 
-      it('debería retornar usuario sin modificar en ambiente local', async () => {
-        const existingUser = sampleUser.update({ idpId: null })
-        mockRepo.findOne.mockResolvedValue(existingUser)
-
-        process.env.NODE_ENV = 'local'
-        const result = await useCase.execute(createUserDTO)
-
-        expect(result).toBe(existingUser)
-        expect(mockIdp.createUser).not.toHaveBeenCalled()
-      })
-
       it('debería manejar error en actualización de IDP', async () => {
         const existingUser = sampleUser.update({ idpId: null })
         mockRepo.findOne.mockResolvedValue(existingUser)
         mockIdp.createUser.mockRejectedValue(new Error('IDP error'))
 
-        process.env.NODE_ENV = 'production'
         await expect(useCase.execute(createUserDTO)).rejects.toThrow('IDP error')
       })
     })
 
     describe('Caso 3: Usuario nuevo', () => {
-      it('debería crear nuevo usuario con IDP en producción', async () => {
+      it('debería crear nuevo usuario con IDP', async () => {
         mockRepo.findOne.mockResolvedValue(null)
         mockIdp.createUser.mockResolvedValue(idpUserResponse)
         mockIdp.assignRole.mockResolvedValue()
         mockRepo.create.mockResolvedValue(sampleUser.update({ idpId: 'auth0|123' }))
 
-        process.env.NODE_ENV = 'production'
         const result = await useCase.execute(createUserDTO)
 
         expect(result.idpId).toBe('auth0|123')
@@ -148,7 +135,6 @@ describe('CreateUserUseCase', () => {
         mockRepo.findOne.mockResolvedValue(null)
         mockIdp.createUser.mockRejectedValue(new Error('IDP error'))
 
-        process.env.NODE_ENV = 'production'
         await expect(useCase.execute(createUserDTO)).rejects.toThrow('IDP error')
       })
 
@@ -158,7 +144,6 @@ describe('CreateUserUseCase', () => {
         mockIdp.assignRole.mockResolvedValue()
         mockRepo.create.mockRejectedValue(new Error('Database error'))
 
-        process.env.NODE_ENV = 'production'
         await expect(useCase.execute(createUserDTO)).rejects.toThrow('Database error')
       })
     })
