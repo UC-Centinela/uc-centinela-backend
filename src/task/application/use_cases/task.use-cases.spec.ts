@@ -6,9 +6,12 @@ import { DeleteTaskUseCase } from './delete-task.use-case'
 import { FindAllTaskUseCase } from './find-all-task.use-case'
 import { FindOneTaskUseCase } from './find-one-task.use-case'
 import { FindByUserIdTaskUseCase } from './find-by-user-id-task.use-case'
+import { IUserService } from '@user/domain/interfaces/user.interface'
+import { User } from '@user/domain/user'
 
 describe('Task Use Cases', () => {
   let storage: jest.Mocked<ITaskStorageAdapter>
+  let userService: jest.Mocked<IUserService>
 
   beforeEach(() => {
     storage = {
@@ -19,6 +22,17 @@ describe('Task Use Cases', () => {
       findOne: jest.fn(),
       findAllByUserId: jest.fn(),
       findAllByReviewerId: jest.fn(),
+    }
+    
+    userService = {
+      findOne: jest.fn(),
+      create: jest.fn(),
+      findAll: jest.fn(),
+      update: jest.fn(),
+      delete: jest.fn(),
+      findUsersByCustomer: jest.fn(),
+      syncUser: jest.fn(),
+      assignRole: jest.fn()
     }
   })
 
@@ -118,17 +132,32 @@ describe('Task Use Cases', () => {
       const task = Task.reconstitute({ id: 42, title: 'Tarea', instruction: '', state: TaskState.PENDING, creatorUserId: 1 } as any)
       storage.findOne.mockResolvedValue(task)
 
-      const useCase = new FindOneTaskUseCase(storage)
+      const useCase = new FindOneTaskUseCase(storage, userService)
       const result = await useCase.execute(42)
 
       expect(storage.findOne).toHaveBeenCalledWith(42)
       expect(result).toEqual(task)
     })
 
+    it('verifica permisos de acceso cuando se proporciona userEmail', async () => {
+      const task = Task.reconstitute({ id: 42, title: 'Tarea', instruction: '', state: TaskState.PENDING, creatorUserId: 1 } as any)
+      storage.findOne.mockResolvedValue(task)
+      
+      const user = { id: 1 } as User
+      userService.findOne.mockResolvedValue(user)
+
+      const useCase = new FindOneTaskUseCase(storage, userService)
+      const result = await useCase.execute(42, 'test@example.com')
+
+      expect(storage.findOne).toHaveBeenCalledWith(42)
+      expect(userService.findOne).toHaveBeenCalledWith('test@example.com')
+      expect(result).toEqual(task)
+    })
+
     it('lanza un error si no encuentra la tarea', async () => {
       storage.findOne.mockRejectedValue(new Error('Error en findOne'))
 
-      const useCase = new FindOneTaskUseCase(storage)
+      const useCase = new FindOneTaskUseCase(storage, userService)
       await expect(useCase.execute(42)).rejects.toThrow('Error en findOne')
     })
   })

@@ -29,8 +29,8 @@ export class TaskService implements ITaskService {
     return this.findAllTask.execute()
   }
 
-  findOne (id: number): Promise<Task> {
-    return this.findOneTask.execute(id)
+  findOne (id: number, userEmail?: string): Promise<Task> {
+    return this.findOneTask.execute(id, userEmail)
   }
 
   update (dto: UpdateTaskDTO): Promise<Task> {
