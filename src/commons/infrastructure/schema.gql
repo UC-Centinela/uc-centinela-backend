@@ -137,7 +137,7 @@ type Query {
   """Provision service: get customer information by email"""
   getCustomerByEmail(email: String!): Customer!
   findAllTasks: [Task!]!
-  findTask(id: Int!): Task!
+  findTask(id: Int!, userEmail: String!): Task!
   findTasksByUser(userId: Int!): [Task!]!
   findTasksByReviewer(revisorId: Int!): [Task!]!
   findAllCriticActivities: [CriticActivity!]!

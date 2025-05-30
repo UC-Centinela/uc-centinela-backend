@@ -30,8 +30,8 @@ export class TaskResolver {
   }
 
   @Query(() => Task)
-  findTask (@Args('id', { type: () => Int }) id: number) {
-    return this.taskService.findOne(id)
+  findTask (@Args('id', { type: () => Int }) id: number, @Args('userEmail', { type: () => String }) userEmail: string) {
+    return this.taskService.findOne(id, userEmail)
   }
 
   @Mutation(() => Task)

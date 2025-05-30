@@ -20,7 +20,7 @@ export interface UpdateTaskDTO {
 export interface ITaskService {
   create(dto: CreateTaskDTO): Promise<Task>;
   findAll(): Promise<Task[]>;
-  findOne(id: number): Promise<Task>;
+  findOne(id: number, userEmail?: string): Promise<Task>;
   update(dto: UpdateTaskDTO): Promise<Task>;
   delete(id: number): Promise<boolean>;
   findAllByUserId(userId: number): Promise<Task[]>;

@@ -6,6 +6,7 @@ import { ITaskStorageAdapter } from '@task/domain/interfaces/task.repository'
 import { TaskStorageAdapter } from './adapters/repository/task-prisma.repository'
 import { TaskStorage } from './adapters/prisma/task.storage'
 import { PrismaService } from '@commons/infrastructure/services/prisma/prisma.service'
+import { UserModule } from '@user/infrastructure/user.module'
 
 import { CreateTaskUseCase } from '@task/application/use_cases/create-task.use-case'
 import { UpdateTaskUseCase } from '@task/application/use_cases/update-task.use-case'
@@ -16,7 +17,7 @@ import { FindByUserIdTaskUseCase } from '@task/application/use_cases/find-by-use
 import { FindByReviewerIdTaskUseCase } from '@task/application/use_cases/find-by-reviewer-id-task.use-case'
 
 @Module({
-  imports: [CommonsModule],
+  imports: [CommonsModule, UserModule],
   providers: [
     TaskResolver,
     PrismaService,
