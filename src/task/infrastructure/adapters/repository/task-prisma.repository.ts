@@ -35,7 +35,7 @@ export class TaskStorageAdapter implements ITaskStorageAdapter {
   }
 
   async update (task: Task): Promise<Task> {
-    const updated = await this.storage.updateTask(task.id, {
+    const updateData: any = {
       title: task.title,
       instruction: task.instruction,
       comments: task.comments,
@@ -43,10 +43,18 @@ export class TaskStorageAdapter implements ITaskStorageAdapter {
       changeHistory: task.changeHistory,
       assignationDate: task.assignationDate,
       requiredSendDate: task.requiredSendDate,
-      creator: { connect: { id: task.creatorUserId } },
-      revisor: task.revisorUserId ? { connect: { id: task.revisorUserId } } : undefined
-    })
+    }
 
+    // Solo incluimos las relaciones si los IDs están definidos
+    if (task.creatorUserId) {
+      updateData.creator = { connect: { id: task.creatorUserId } }
+    }
+    
+    if (task.revisorUserId) {
+      updateData.revisor = { connect: { id: task.revisorUserId } }
+    }
+
+    const updated = await this.storage.updateTask(task.id, updateData)
     return mapPrismaTaskToDomain(updated)
   }
 
