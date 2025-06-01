@@ -17,6 +17,7 @@ import { UploadMediaUseCase } from '@multimedia/application/use_cases/upload-med
 import { IBMStorageAdapter } from './adapters/ibm-storage.adapter'
 import { FFmpegAudioExtractorAdapter } from './adapters/ffmpeg-audio-extractor.adapter'
 import { OpenAITranscriptionAdapter } from './adapters/openai-transcription.adapter'
+import { UploadPhotoUseCase } from '@multimedia/application/use_cases/upload-photo.use-case'
 
 @Module({
   imports: [CommonsModule],
@@ -35,6 +36,7 @@ import { OpenAITranscriptionAdapter } from './adapters/openai-transcription.adap
     IBMStorageAdapter,
     FFmpegAudioExtractorAdapter,
     OpenAITranscriptionAdapter,
+    UploadPhotoUseCase,
     {
       provide: 'IMultimediaService',
       useClass: MultimediaService
