@@ -13,7 +13,6 @@ export class IBMStorageAdapter implements IStorageService {
   ) {
     this.logger.setTraceContext(IBMStorageAdapter.name)
 
-    // Extraer configuración de IBM COS
     const ibmConfig = config.ibm
     const endpoint = ibmConfig.endpoint
     const apiKeyId = ibmConfig.apiKey
@@ -21,7 +20,6 @@ export class IBMStorageAdapter implements IStorageService {
     const ibmAuthEndpoint = ibmConfig.ibmAuthEndpoint
     const region = ibmConfig.region
 
-    // Inicializar cliente S3 con autenticación IAM
     this.s3Client = new S3({
       endpoint,
       ibmAuthEndpoint,
@@ -30,7 +28,6 @@ export class IBMStorageAdapter implements IStorageService {
       signatureVersion: 'iam',
       region,
     })
-
   }
 
   async uploadFile (
@@ -39,7 +36,8 @@ export class IBMStorageAdapter implements IStorageService {
     mimetype: string,
   ): Promise<string> {
     const bucketName = config.ibm.bucketName
-    const key = `videos/${Date.now()}-${filename}`
+    const prefix = mimetype.startsWith('image/') ? 'photos' : 'videos'
+    const key = `${prefix}/${Date.now()}-${filename}`
 
     try {
       await this.s3Client.putObject({
@@ -61,13 +59,16 @@ export class IBMStorageAdapter implements IStorageService {
 
   async deleteFile (fileUrl: string): Promise<void> {
     const bucketName = config.ibm.bucketName
-    const key = fileUrl.split(`${bucketName}/`)[1]
 
     try {
+      const parsed = new URL(fileUrl)
+      const key = decodeURIComponent(parsed.pathname.slice(1))
+
       await this.s3Client.deleteObject({
         Bucket: bucketName,
         Key: key,
       }).promise()
+
       this.logger.debug(`[deleteFile] Deleted: ${fileUrl}`)
     } catch (error: any) {
       this.logger.error(`[deleteFile] Error: ${error.message}`)

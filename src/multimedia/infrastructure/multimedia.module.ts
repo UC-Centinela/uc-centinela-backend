@@ -37,27 +37,28 @@ import { UploadPhotoUseCase } from '@multimedia/application/use_cases/upload-pho
     FFmpegAudioExtractorAdapter,
     OpenAITranscriptionAdapter,
     UploadPhotoUseCase,
+
     {
       provide: 'IMultimediaService',
-      useClass: MultimediaService
+      useClass: MultimediaService,
     },
     {
       provide: IMultimediaStorageAdapter,
-      useClass: MultimediaStorageAdapter
+      useClass: MultimediaStorageAdapter,
     },
     {
       provide: 'STORAGE_SERVICE',
-      useClass: IBMStorageAdapter
+      useClass: IBMStorageAdapter,
     },
     {
       provide: 'AUDIO_EXTRACTOR_SERVICE',
-      useClass: FFmpegAudioExtractorAdapter
+      useClass: FFmpegAudioExtractorAdapter,
     },
     {
       provide: 'TRANSCRIPTION_SERVICE',
-      useClass: OpenAITranscriptionAdapter
-    }
+      useClass: OpenAITranscriptionAdapter,
+    },
   ],
-  exports: ['IMultimediaService']
+  exports: ['IMultimediaService'],
 })
 export class MultimediaModule {}
