@@ -27,11 +27,6 @@ export class CreateUserUseCase {
     if (user && !user.idpId) {
       this.logger.warn(`[execute] User exists in database but lacks idpId: ${user.email}`)
 
-      // Si estamos en modo local, no registramos en Auth0
-      if (process.env.NODE_ENV === 'local') {
-        return user
-      }
-
       const idpUser = await this.enroleUserInIdentityProvider(createUserDTO)
       const updatedUser = await this.userRepository.update(user.update({ idpId: idpUser.user_id, role: createUserDTO.role }))
       return updatedUser
